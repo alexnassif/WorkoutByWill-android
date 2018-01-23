@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "422957248488",
+    "firebase_url": "https://willfitness-299fa.firebaseio.com",
+    "project_id": "willfitness-299fa",
+    "storage_bucket": "willfitness-299fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422957248488:android:4cc92cccc595e96d",
+        "android_client_info": {
+          "package_name": "com.alexnassif.mobile.workoutbywill"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422957248488-i7d85ek7akos0if5lqhluic1sr4c643b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9EfNgvqSOm4j6oRJMdFSRCHm9Mk70ioI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
