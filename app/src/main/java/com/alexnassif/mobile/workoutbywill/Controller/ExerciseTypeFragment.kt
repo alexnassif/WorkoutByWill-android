@@ -46,7 +46,14 @@ class ExerciseTypeFragment : Fragment() {
 
             var gridLayoutManager = GridLayoutManager(context, 2)
             exerciseRecyclerView.layoutManager = gridLayoutManager
-            adapter = ExerciseAdapter(context, ex){
+            adapter = ExerciseAdapter(context, ex){exType ->
+                var fragment = ExerciseDetailFragment.newInstance("hello", "hello2")
+
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
+                        .addToBackStack(fragment.javaClass.getSimpleName())
+                        .commit()
 
             }
             exerciseRecyclerView.adapter = adapter

@@ -36,6 +36,12 @@ class ExerciseAdapter(val context: Context, val exercises: MutableList<Exercise>
             val resourceId = context.resources.getIdentifier("placeholderpic", "drawable", context.packageName)
             exerciseName?.text = exercise.name
             exerciseImage?.setImageResource(resourceId)
+
+            itemView.setOnClickListener {
+                itemClick(exercise)
+            }
         }
+
+
     }
 }
