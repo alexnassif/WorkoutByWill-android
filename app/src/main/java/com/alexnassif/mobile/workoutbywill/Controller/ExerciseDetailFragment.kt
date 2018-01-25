@@ -83,7 +83,7 @@ class ExerciseDetailFragment : Fragment() {
         }
 
         override fun getCount(): Int {
-            return NUM_PAGES//To change body of created functions use File | Settings | File Templates.
+            return NUM_PAGES
         }
     }
 

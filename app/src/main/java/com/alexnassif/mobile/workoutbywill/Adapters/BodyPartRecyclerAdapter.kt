@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.alexnassif.mobile.workoutbywill.Model.Category
 import com.alexnassif.mobile.workoutbywill.R
+import com.bumptech.glide.Glide
 
 /**
  * Created by raymond on 1/21/18.
@@ -35,7 +36,9 @@ class BodyPartRecyclerAdapter(val context: Context, val exCategories: List<Categ
         fun bindCategory(category: Category, context: Context){
             val resourceId = context.resources.getIdentifier(category.image, "drawable", context.packageName)
             categoryName?.text = category.title
-            categoryImage?.setImageResource(resourceId)
+            if (categoryImage != null) {
+                Glide.with(context).load(resourceId).into(categoryImage)
+            }
 
             itemView.setOnClickListener {
                 itemClick(category)
