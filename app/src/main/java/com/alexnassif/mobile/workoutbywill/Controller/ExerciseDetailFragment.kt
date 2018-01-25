@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.fragment_image.*
  */
 class ExerciseDetailFragment : Fragment() {
 
-    // TODO: Rename and change types of parameters
     private var exercise: Exercise? = null
 
     private var pagerAdapter: ScreenSlidePagerAdapter? = null

@@ -5,7 +5,6 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.alexnassif.mobile.workoutbywill.Controller.ExerciseFragment
-import com.alexnassif.mobile.workoutbywill.Services.DataService
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -42,5 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
+        setSupportActionBar(app_toolbar)
+        supportActionBar?.setLogo(R.drawable.logo)
     }
 }

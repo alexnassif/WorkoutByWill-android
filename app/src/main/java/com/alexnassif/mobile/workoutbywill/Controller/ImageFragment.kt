@@ -38,10 +38,16 @@ class ImageFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if (mPageNumber == 0)
+        if (mPageNumber == 0){
             beforeAfterTextView.text = "Before"
-        else
+            rightArrowImageView.visibility = View.VISIBLE
+            leftArrowImageView.visibility = View.INVISIBLE
+        }
+        else {
             beforeAfterTextView.text = "After"
+            rightArrowImageView.visibility = View.INVISIBLE
+            leftArrowImageView.visibility = View.VISIBLE
+        }
     }
 
     fun getPageNumber(): Int? {
