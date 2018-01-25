@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.alexnassif.mobile.workoutbywill.R
+import kotlinx.android.synthetic.main.fragment_image.*
 
 
 /**
@@ -34,7 +35,16 @@ class ImageFragment : Fragment() {
         return rootView
     }
 
-    public fun getPageNumber(): Int? {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        if (mPageNumber == 0)
+            beforeAfterTextView.text = "Before"
+        else
+            beforeAfterTextView.text = "After"
+    }
+
+    fun getPageNumber(): Int? {
         return mPageNumber
     }
 

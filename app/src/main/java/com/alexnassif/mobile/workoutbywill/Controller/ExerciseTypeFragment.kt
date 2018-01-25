@@ -46,8 +46,8 @@ class ExerciseTypeFragment : Fragment() {
 
             var gridLayoutManager = GridLayoutManager(context, 2)
             exerciseRecyclerView.layoutManager = gridLayoutManager
-            adapter = ExerciseAdapter(context, ex){exType ->
-                var fragment = ExerciseDetailFragment.newInstance("hello", "hello2")
+            adapter = ExerciseAdapter(context, ex){exercise ->
+                var fragment = ExerciseDetailFragment.newInstance(exercise)
 
                 fragmentManager
                         .beginTransaction()
