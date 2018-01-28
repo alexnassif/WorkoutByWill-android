@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.alexnassif.mobile.workoutbywill.Controller.ExerciseFragment
+import com.alexnassif.mobile.workoutbywill.Controller.WorkoutFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +15,8 @@ class MainActivity : AppCompatActivity() {
         item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-
+                selectedFragment = WorkoutFragment.newInstance("hello", "world")
+                addFragment(selectedFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_exercises -> {
@@ -43,5 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(app_toolbar)
         supportActionBar?.setLogo(R.drawable.logo)
+        selectedFragment = WorkoutFragment.newInstance("hello", "world")
+        addFragment(selectedFragment)
     }
 }

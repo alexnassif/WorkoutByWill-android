@@ -21,11 +21,11 @@ class ExerciseAdapter(val context: Context, val exercises: MutableList<Exercise>
     }
 
     override fun onBindViewHolder(holder: ExerciseHolder, position: Int) {
-        holder?.bindExercise(exercises.get(position), context)
+        holder.bindExercise(exercises.get(position), context)
     }
 
     override fun getItemCount(): Int {
-        return exercises.size
+        return exercises.count()
     }
 
     inner class ExerciseHolder(v: View?, val itemClick: (Exercise) -> Unit): RecyclerView.ViewHolder(v){
