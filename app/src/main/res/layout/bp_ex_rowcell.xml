@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/bodypartTextView"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
@@ -27,6 +27,5 @@
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bodypartTextView"
-        app:srcCompat="@drawable/placeholderpic" />
+        app:layout_constraintTop_toBottomOf="@+id/bodypartTextView" />
 </android.support.constraint.ConstraintLayout>

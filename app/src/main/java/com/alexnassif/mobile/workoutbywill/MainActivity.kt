@@ -40,12 +40,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        selectedFragment = WorkoutFragment.newInstance("hello", "world")
+        supportFragmentManager
+                .beginTransaction()
+                .add(R.id.content_frame, selectedFragment, selectedFragment.javaClass.getSimpleName())
+                .commit()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         setSupportActionBar(app_toolbar)
         supportActionBar?.setLogo(R.drawable.logo)
-        selectedFragment = WorkoutFragment.newInstance("hello", "world")
-        addFragment(selectedFragment)
+
+
     }
 }
