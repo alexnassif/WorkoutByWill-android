@@ -26,14 +26,15 @@ object DataService {
                 val children = snapshot!!.children
                 children.forEach {
                     childx ->
-                    val name = childx.child("name").value.toString()
+
+                    val exercise = childx.getValue(Exercise::class.java)
+                    /*val name = childx.child("name").value.toString()
                     val how = childx.child("how").value.toString()
                     val why = childx.child("why").value.toString()
                     val imageBefore = childx.child("imageBefore").value.toString()
                     val imageAfter = childx.child("imageAfter").value.toString()
-                    var exercise = Exercise(name, how, why, imageBefore, imageAfter)
-                    exerciseList.add(exercise)
-
+                    var exercise = Exercise(name, how, why, imageBefore, imageAfter)*/
+                    exerciseList.add(exercise!!)
 
                 }
 

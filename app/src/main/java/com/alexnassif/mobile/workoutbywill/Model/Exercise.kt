@@ -7,7 +7,25 @@ import java.io.Serializable
 /**
  * Created by raymond on 1/22/18.
  */
-class Exercise(val name: String, val how: String, val why: String, val imageAfter: String, val imageBefore: String) :Parcelable {
+class Exercise :Parcelable {
+
+    lateinit var name: String
+    lateinit var how: String
+    lateinit var why: String
+    lateinit var imageAfter: String
+    lateinit var imageBefore: String
+
+    constructor(){
+
+    }
+
+    constructor(name: String, how: String, why: String, imageAfter: String, imageBefore: String){
+        this.name = name!!
+        this.how = how
+        this.why = why
+        this.imageAfter = imageAfter
+        this.imageBefore = imageBefore
+    }
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
