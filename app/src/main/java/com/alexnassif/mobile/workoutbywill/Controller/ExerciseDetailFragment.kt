@@ -79,7 +79,13 @@ class ExerciseDetailFragment : Fragment() {
 
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {
-            return ImageFragment.newInstance(position)
+
+            if (position == 1) {
+
+                return ImageFragment.newInstance(position, exercise!!.imageBefore)
+
+            }
+            return ImageFragment.newInstance(position, exercise!!.imageAfter)
         }
 
         override fun getCount(): Int {

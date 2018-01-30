@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.alexnassif.mobile.workoutbywill.R
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_image.*
 
 
@@ -19,10 +20,12 @@ import kotlinx.android.synthetic.main.fragment_image.*
 class ImageFragment : Fragment() {
 
     private var mPageNumber: Int? = null
+    private var mImageUrl: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             mPageNumber = arguments.getInt(arg_pageNumber)
+            mImageUrl = arguments.getString(imageUrl)
         }
     }
 
@@ -48,6 +51,8 @@ class ImageFragment : Fragment() {
             rightArrowImageView.visibility = View.INVISIBLE
             leftArrowImageView.visibility = View.VISIBLE
         }
+
+        Glide.with(context).load(mImageUrl).into(beforeAfterImageView)
     }
 
     fun getPageNumber(): Int? {
@@ -56,10 +61,12 @@ class ImageFragment : Fragment() {
 
     companion object {
         private val arg_pageNumber = "pagenumber"
-        fun newInstance(pageNumber: Int): ImageFragment {
+        private val imageUrl = "image"
+        fun newInstance(pageNumber: Int, image: String): ImageFragment {
             val fragment = ImageFragment()
             val args = Bundle()
             args.putInt(arg_pageNumber, pageNumber)
+            args.putString(imageUrl, image)
             fragment.arguments = args
             return fragment
         }

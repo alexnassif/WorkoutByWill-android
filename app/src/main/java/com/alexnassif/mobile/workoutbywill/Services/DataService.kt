@@ -13,10 +13,11 @@ object DataService {
     private var database = FirebaseDatabase.getInstance()!!
     private var myRef = database.getReference("exercises")
 
-    fun getExercises(completion: (MutableList<Exercise>) -> Unit) {
+    fun getExercises(type: String, completion: (MutableList<Exercise>) -> Unit) {
 
+        var referenceType = myRef.child(type)
         var exerciseList = mutableListOf<Exercise>()
-        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        referenceType.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError?) {
                 println(error!!.message)
             }
@@ -49,9 +50,9 @@ object DataService {
 
     val bpCategories = listOf(
 
-            Category("Neck and Shoulder", "placeholderpic" ),
-            Category("Knee and Ankle", "placeholderpic" ),
-            Category("Lower Back and Hip", "placeholderpic" )
+            Category("neckandshoulders", "placeholderpic" ),
+            Category("kneeandankle", "placeholderpic" ),
+            Category("lowerbackandhip", "placeholderpic" )
 
     )
 }

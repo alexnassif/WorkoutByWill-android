@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.alexnassif.mobile.workoutbywill.Model.Exercise
 import com.alexnassif.mobile.workoutbywill.R
+import com.bumptech.glide.Glide
 
 /**
  * Created by raymond on 1/22/18.
@@ -33,9 +34,8 @@ class ExerciseAdapter(val context: Context, val exercises: MutableList<Exercise>
         val exerciseImage = v?.findViewById<ImageView>(R.id.exerciseImageView)
 
         fun bindExercise(exercise: Exercise, context: Context){
-            val resourceId = context.resources.getIdentifier("placeholderpic", "drawable", context.packageName)
             exerciseName?.text = exercise.name
-            exerciseImage?.setImageResource(resourceId)
+            Glide.with(context).load(exercise.imageAfter).into(exerciseImage!!)
 
             itemView.setOnClickListener {
                 itemClick(exercise)

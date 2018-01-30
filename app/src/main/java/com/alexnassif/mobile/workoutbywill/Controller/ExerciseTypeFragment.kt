@@ -42,7 +42,7 @@ class ExerciseTypeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        DataService.getExercises{ex ->
+        DataService.getExercises(type!!){ ex ->
 
             var gridLayoutManager = GridLayoutManager(context, 2)
             exerciseRecyclerView.layoutManager = gridLayoutManager

@@ -40,7 +40,7 @@ class ExerciseFragment : Fragment() {
         adapter = BodyPartRecyclerAdapter(context, DataService.bpCategories) {
 
             exType ->
-            var fragment = ExerciseTypeFragment.newInstance("hello")
+            var fragment = ExerciseTypeFragment.newInstance(exType.title)
 
                     fragmentManager
                     .beginTransaction()
