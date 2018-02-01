@@ -35,7 +35,7 @@ class BodyPartRecyclerAdapter(val context: Context, val exCategories: List<Categ
 
         fun bindCategory(category: Category, context: Context){
             val resourceId = context.resources.getIdentifier(category.image, "drawable", context.packageName)
-            categoryName?.text = category.title
+            categoryName?.text = category.uiName
 
             Glide.with(context).load(resourceId).into(categoryImage!!)
 

@@ -51,9 +51,9 @@ object DataService {
 
     val bpCategories = listOf(
 
-            Category("neckandshoulders", "placeholderpic" ),
-            Category("kneeandankle", "placeholderpic" ),
-            Category("lowerbackandhip", "placeholderpic" )
+            Category("neckandshoulders", "Neck and Shoulders" ,"placeholderpic" ),
+            Category("kneeandankle", "Knee and Ankle", "placeholderpic" ),
+            Category("lowerbackandhip", "Lower Back and Hip", "placeholderpic" )
 
     )
 }
