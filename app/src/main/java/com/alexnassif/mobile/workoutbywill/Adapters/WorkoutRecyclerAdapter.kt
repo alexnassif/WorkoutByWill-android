@@ -30,7 +30,7 @@ class WorkoutRecyclerAdapter(val context: Context, val workoutList: MutableList<
         holder.bindWorkout(workoutList.get(position), context)
     }
 
-    inner class WorkoutHolder(v:View?, itemClick:(Workout) -> Unit):RecyclerView.ViewHolder(v) {
+    inner class WorkoutHolder(v:View?, val itemClick:(Workout) -> Unit):RecyclerView.ViewHolder(v) {
         val workoutName = v?.findViewById<TextView>(R.id.workoutNameTextView)
         val workoutImage = v?.findViewById<ImageView>(R.id.workoutImageView)
 
