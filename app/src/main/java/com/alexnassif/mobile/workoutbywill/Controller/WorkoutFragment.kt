@@ -45,12 +45,11 @@ class WorkoutFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         var list = mutableListOf<Workout>()
-        list.add(Workout())
-        list.add(Workout())
+        list.add(Workout("randomWorkout"))
         var layoutMan = GridLayoutManager(context, 2)
         workoutRecyclerView.layoutManager = layoutMan
         adapter = WorkoutRecyclerAdapter(context, list){workout ->
-            var fragment = WorkoutDetailFragment.newInstance("hello", "world")
+            var fragment = WorkoutDetailFragment.newInstance(workout.name)
 
             fragmentManager
                     .beginTransaction()

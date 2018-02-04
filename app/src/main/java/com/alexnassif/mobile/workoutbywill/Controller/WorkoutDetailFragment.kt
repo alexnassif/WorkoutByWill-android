@@ -3,11 +3,14 @@ package com.alexnassif.mobile.workoutbywill.Controller
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.alexnassif.mobile.workoutbywill.R
+import com.alexnassif.mobile.workoutbywill.Services.DataService
 import kotlinx.android.synthetic.main.fragment_workout_detail.*
 
 
@@ -19,16 +22,14 @@ import kotlinx.android.synthetic.main.fragment_workout_detail.*
 class WorkoutDetailFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
+    private var mWorkoutName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
-            mParam2 = arguments.getString(ARG_PARAM2)
+            mWorkoutName = arguments.getString(WORKOUT_NAME)
         }
-        
+
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -40,26 +41,27 @@ class WorkoutDetailFragment : Fragment() {
     companion object {
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private val ARG_PARAM1 = "param1"
-        private val ARG_PARAM2 = "param2"
+        private val WORKOUT_NAME = "workoutName"
+        private val NUM_PAGES = 7
 
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WorkoutDetailFragment.
-         */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): WorkoutDetailFragment {
+        fun newInstance(workoutName: String): WorkoutDetailFragment {
             val fragment = WorkoutDetailFragment()
             val args = Bundle()
-            args.putString(ARG_PARAM1, param1)
-            args.putString(ARG_PARAM2, param2)
+            args.putString(WORKOUT_NAME, workoutName)
             fragment.arguments = args
             return fragment
         }
     }
 
-}// Required empty public constructor
+    private inner class DaySlidePagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
+        override fun getItem(position: Int): Fragment {
+            return DayFragment.newInstance("monday")
+        }
+
+        override fun getCount(): Int {
+            return NUM_PAGES
+        }
+
+    }// Required empty public constructor
+}

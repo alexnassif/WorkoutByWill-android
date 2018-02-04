@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import com.alexnassif.mobile.workoutbywill.Model.Workout
 import android.view.View
 import android.widget.TextView
+import com.alexnassif.mobile.workoutbywill.Model.ExerciseDetail
 import com.alexnassif.mobile.workoutbywill.R
 import kotlinx.android.synthetic.main.workout_detail_cell.view.*
 
 /**
  * Created by alexnassif on 2/1/18.
  */
-class WorkoutDetailAdapter(val context: Context, val workoutDetailList: MutableList<Workout>, val itemClick: (String) -> Unit)
+class WorkoutDetailAdapter(val context: Context, val workoutDetailList: MutableList<ExerciseDetail>, val itemClick: (String) -> Unit)
     : RecyclerView.Adapter<WorkoutDetailAdapter.WorkoutDetailHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): WorkoutDetailHolder {
@@ -34,14 +35,14 @@ class WorkoutDetailAdapter(val context: Context, val workoutDetailList: MutableL
         val rest = v?.findViewById<TextView>(R.id.restTextView)
         val exName = v?.findViewById<TextView>(R.id.exerciseWkDetailLbl)
 
-        fun bindWorkoutDetail(context: Context, workout: Workout){
-            reps?.text = workout.reps
-            sets?.text = workout.sets
-            rest?.text = workout.rest
-            exName?.text = workout.name
+        fun bindWorkoutDetail(context: Context, exerciseIns: ExerciseDetail){
+            reps?.text = exerciseIns.reps
+            sets?.text = exerciseIns.sets
+            rest?.text = exerciseIns.rest
+            exName?.text = exerciseIns.exerciseName
 
             itemView.setOnClickListener {
-                itemClick(workout.name)
+                itemClick(exerciseIns.exerciseName)
             }
         }
 
