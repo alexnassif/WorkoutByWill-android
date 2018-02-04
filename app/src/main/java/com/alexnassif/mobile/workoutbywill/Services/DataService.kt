@@ -16,14 +16,26 @@ object DataService {
     private var randomWorkout = database.getReference("randomWorkout")
 
 
-    fun getDayList(day: String, completion: (MutableList<ExerciseDetail>) -> Unit){
-
-        var dayRef = randomWorkout.child(day)
+    fun getDayList(workout: String, day: String, completion: (MutableList<ExerciseDetail>) -> Unit){
+        println(" this is workout name " + workout)
+        var dayRef = database.getReference(workout).child(day)
         var detailList = mutableListOf<ExerciseDetail>()
         dayRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot?) {
                 val children = snapshot!!.children
-                println(snapshot)
+                //println(" this is the snapshot " + snapshot)
+                children.forEach { childx ->
+
+                    val name = childx.child("exerciseName").value.toString()
+                    val reps = childx.child("reps").value.toString()
+                    val rest = childx.child("rest").value.toString()
+                    val sets = childx.child("sets").value.toString()
+                    var exerciseDetail = ExerciseDetail(name, reps, rest, sets)
+                    detailList.add(exerciseDetail)
+
+                }
+
+                completion(detailList)
             }
 
             override fun onCancelled(error: DatabaseError?) {

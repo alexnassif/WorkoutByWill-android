@@ -24,6 +24,7 @@ class DayFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
     private var mDay: String? = null
+    private var mWorkout: String? = null
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: WorkoutDetailAdapter
 
@@ -31,6 +32,7 @@ class DayFragment : Fragment() {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             mDay = arguments.getString(DAY_PARAM)
+            mWorkout = arguments.getString(WOROUT_PARAM)
         }
     }
 
@@ -45,8 +47,9 @@ class DayFragment : Fragment() {
 
         layoutManager = LinearLayoutManager(context)
         dayRecyclerView.layoutManager = layoutManager
-        DataService.getDayList(mDay!!) {
-            adapter = WorkoutDetailAdapter(context, it) {
+        DataService.getDayList(mWorkout!!, mDay!!) {dayList ->
+            //println("dayLIst count " + dayList.count())
+            adapter = WorkoutDetailAdapter(context, dayList) {
 
             }
 
@@ -60,6 +63,7 @@ class DayFragment : Fragment() {
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
         private val DAY_PARAM = "day"
+        private val WOROUT_PARAM = "workout"
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -69,9 +73,10 @@ class DayFragment : Fragment() {
          * @return A new instance of fragment DayFragment.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(day: String): DayFragment {
+        fun newInstance(workoutName: String, day: String): DayFragment {
             val fragment = DayFragment()
             val args = Bundle()
+            args.putString(WOROUT_PARAM, workoutName)
             args.putString(DAY_PARAM, day)
             fragment.arguments = args
             return fragment

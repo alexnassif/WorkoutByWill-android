@@ -2,6 +2,7 @@ package com.alexnassif.mobile.workoutbywill.Adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.alexnassif.mobile.workoutbywill.Model.Workout
 import android.view.View
@@ -17,15 +18,16 @@ class WorkoutDetailAdapter(val context: Context, val workoutDetailList: MutableL
     : RecyclerView.Adapter<WorkoutDetailAdapter.WorkoutDetailHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): WorkoutDetailHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val view = LayoutInflater.from(context).inflate(R.layout.workout_detail_cell, parent, false)
+        return WorkoutDetailHolder(view, itemClick)
     }
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return workoutDetailList.count()
     }
 
     override fun onBindViewHolder(holder: WorkoutDetailHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        holder.bindWorkoutDetail(context, workoutDetailList.get(position))
     }
 
     inner class WorkoutDetailHolder(v: View?, val itemClick: (String) -> Unit): RecyclerView.ViewHolder(v){

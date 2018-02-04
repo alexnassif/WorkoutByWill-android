@@ -2,9 +2,11 @@ package com.alexnassif.mobile.workoutbywill.Controller
 
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,12 +25,35 @@ class WorkoutDetailFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
     private var mWorkoutName: String? = null
+    private var dayPagerAdapter: DaySlidePagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             mWorkoutName = arguments.getString(WORKOUT_NAME)
         }
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        dayPagerAdapter = DaySlidePagerAdapter(childFragmentManager)
+        workoutViewPager.adapter = dayPagerAdapter
+        workoutViewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                //workoutViewPager.currentItem = tab!!.position
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                workoutViewPager.currentItem = tab!!.position
+            }
+
+        })
 
     }
 
@@ -56,7 +81,7 @@ class WorkoutDetailFragment : Fragment() {
 
     private inner class DaySlidePagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {
-            return DayFragment.newInstance("monday")
+            return DayFragment.newInstance(mWorkoutName!!,"monday")
         }
 
         override fun getCount(): Int {
