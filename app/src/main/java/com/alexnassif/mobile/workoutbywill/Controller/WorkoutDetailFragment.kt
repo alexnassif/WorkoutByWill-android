@@ -81,6 +81,16 @@ class WorkoutDetailFragment : Fragment() {
 
     private inner class DaySlidePagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {
+            println("the position here is " + position)
+            when (position){
+                0 -> return DayFragment.newInstance(mWorkoutName!!,"monday")
+                1 -> return DayFragment.newInstance(mWorkoutName!!,"tuesday")
+                2-> return DayFragment.newInstance(mWorkoutName!!,"wednesday")
+                3 -> return DayFragment.newInstance(mWorkoutName!!,"thursday")
+                4 -> return DayFragment.newInstance(mWorkoutName!!,"friday")
+                5 -> return DayFragment.newInstance(mWorkoutName!!,"saturday")
+                6 -> return DayFragment.newInstance(mWorkoutName!!,"sunday")
+            }
             return DayFragment.newInstance(mWorkoutName!!,"monday")
         }
 
