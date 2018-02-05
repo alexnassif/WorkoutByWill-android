@@ -48,8 +48,9 @@ class DayFragment : Fragment() {
         layoutManager = LinearLayoutManager(context)
         dayRecyclerView.layoutManager = layoutManager
         DataService.getDayList(mWorkout!!, mDay!!) {dayList ->
-            //println("dayLIst count " + dayList.count())
             adapter = WorkoutDetailAdapter(context, dayList) {
+             keyName, category   -> println(keyName + " " + category)
+
 
             }
 

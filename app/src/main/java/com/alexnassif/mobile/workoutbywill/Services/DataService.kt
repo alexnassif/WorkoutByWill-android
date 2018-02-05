@@ -13,24 +13,22 @@ object DataService {
 
     private var database = FirebaseDatabase.getInstance()!!
     private var exercisesRef = database.getReference("exercises")
-    private var randomWorkout = database.getReference("randomWorkout")
-
 
     fun getDayList(workout: String, day: String, completion: (MutableList<ExerciseDetail>) -> Unit){
-        println(" this is workout name " + workout)
+
         var dayRef = database.getReference(workout).child(day)
         var detailList = mutableListOf<ExerciseDetail>()
         dayRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot?) {
                 val children = snapshot!!.children
-                //println(" this is the snapshot " + snapshot)
                 children.forEach { childx ->
-
+                    val keyName = childx.key
                     val name = childx.child("exerciseName").value.toString()
                     val reps = childx.child("reps").value.toString()
                     val rest = childx.child("rest").value.toString()
                     val sets = childx.child("sets").value.toString()
-                    var exerciseDetail = ExerciseDetail(name, reps, rest, sets)
+                    val category = childx.child("category").value.toString()
+                    var exerciseDetail = ExerciseDetail(keyName, name, reps, rest, sets, category)
                     detailList.add(exerciseDetail)
 
                 }
@@ -43,6 +41,21 @@ object DataService {
             }
         })
 
+    }
+
+    fun getSingleExercise(category: String, keyName: String, completion: (Exercise) -> Unit){
+
+        val exRef = exercisesRef.child(category).child(keyName)
+
+        exRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot?) {
+
+            }
+
+            override fun onCancelled(error: DatabaseError?) {
+                println(error!!.message)
+            }
+        })
     }
 
     fun getExercises(type: String, completion: (MutableList<Exercise>) -> Unit) {

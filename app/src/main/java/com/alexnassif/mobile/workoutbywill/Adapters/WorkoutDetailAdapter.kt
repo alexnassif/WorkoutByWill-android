@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.workout_detail_cell.view.*
 /**
  * Created by alexnassif on 2/1/18.
  */
-class WorkoutDetailAdapter(val context: Context, val workoutDetailList: MutableList<ExerciseDetail>, val itemClick: (String) -> Unit)
+class WorkoutDetailAdapter(val context: Context, val workoutDetailList: MutableList<ExerciseDetail>, val itemClick: (String, String) -> Unit)
     : RecyclerView.Adapter<WorkoutDetailAdapter.WorkoutDetailHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): WorkoutDetailHolder {
@@ -30,7 +30,7 @@ class WorkoutDetailAdapter(val context: Context, val workoutDetailList: MutableL
         holder.bindWorkoutDetail(context, workoutDetailList.get(position))
     }
 
-    inner class WorkoutDetailHolder(v: View?, val itemClick: (String) -> Unit): RecyclerView.ViewHolder(v){
+    inner class WorkoutDetailHolder(v: View?, val itemClick: (String, String) -> Unit): RecyclerView.ViewHolder(v){
 
         val reps = v?.findViewById<TextView>(R.id.repsTextView)
         val sets = v?.findViewById<TextView>(R.id.setsTextView)
@@ -44,7 +44,7 @@ class WorkoutDetailAdapter(val context: Context, val workoutDetailList: MutableL
             exName?.text = exerciseIns.exerciseName
 
             itemView.setOnClickListener {
-                itemClick(exerciseIns.exerciseName)
+                itemClick(exerciseIns.keyName, exerciseIns.category)
             }
         }
 
