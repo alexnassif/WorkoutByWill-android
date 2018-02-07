@@ -1,6 +1,7 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -49,7 +50,14 @@ class DayFragment : Fragment() {
         dayRecyclerView.layoutManager = layoutManager
         DataService.getDayList(mWorkout!!, mDay!!) {dayList ->
             adapter = WorkoutDetailAdapter(context, dayList) {
-             keyName, category   -> println(keyName + " " + category)
+             keyName, category   ->
+
+                DataService.getSingleExercise(category, keyName){ exercise
+                   -> val intent = Intent(context, ExerciseDetailActivity::class.java)
+                    intent.putExtra("exercise", exercise)
+                    startActivity(intent)
+
+                }
 
 
             }

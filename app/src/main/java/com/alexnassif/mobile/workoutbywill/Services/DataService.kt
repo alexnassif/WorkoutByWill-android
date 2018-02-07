@@ -50,6 +50,13 @@ object DataService {
         exRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot?) {
 
+
+                var exercise: Exercise? = null
+
+                exercise = snapshot!!.getValue(Exercise::class.java)
+
+                completion(exercise!!)
+
             }
 
             override fun onCancelled(error: DatabaseError?) {
