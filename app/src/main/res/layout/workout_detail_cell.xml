@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="25dp">
 
     <ImageView
         android:id="@+id/workoutDetailImageView"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,34 +21,28 @@
         android:id="@+id/repsLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:text="Reps"
-        app:layout_constraintEnd_toStartOf="@+id/setsLbl"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/workoutDetailImageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/exerciseWkDetailLbl"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseWkDetailLbl" />
 
     <TextView
         android:id="@+id/setsLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
         android:text="Sets"
-        app:layout_constraintEnd_toStartOf="@+id/restLbl"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/repsLbl"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/repsLbl" />
 
     <TextView
         android:id="@+id/restLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
         android:text="Rest"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/setsLbl"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/setsLbl" />
 
     <TextView
         android:id="@+id/repsTextView"
@@ -62,32 +57,28 @@
         android:id="@+id/setsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/setsLbl"
-        app:layout_constraintTop_toBottomOf="@+id/setsLbl" />
+        app:layout_constraintTop_toTopOf="@+id/repsTextView" />
 
     <TextView
         android:id="@+id/restTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="17dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/restLbl"
-        app:layout_constraintTop_toBottomOf="@+id/restLbl" />
+        app:layout_constraintTop_toTopOf="@+id/setsTextView" />
 
     <TextView
         android:id="@+id/exerciseWkDetailLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Title"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/repsLbl"
-        app:layout_constraintStart_toStartOf="@+id/repsLbl"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/workoutDetailImageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
