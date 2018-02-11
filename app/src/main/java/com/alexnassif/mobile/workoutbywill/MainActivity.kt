@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         setSupportActionBar(app_toolbar)
-        supportActionBar?.setLogo(R.drawable.logo)
 
 
     }

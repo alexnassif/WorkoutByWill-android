@@ -18,11 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Adapters.Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Controller.ExerciseDetailActivity"></activity>
+        <activity android:name=".Controller.ExerciseDetailActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

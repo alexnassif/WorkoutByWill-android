@@ -48,12 +48,32 @@ class ExerciseDetailFragment : Fragment() {
 
             }
             override fun onPageSelected(position: Int) {
+
+                if(position == 0) {
+                    leftArrowImageView.visibility = View.INVISIBLE
+                    rightArrowImageView.visibility = View.VISIBLE
+                }
+
+                if(position == 1){
+                    leftArrowImageView.visibility = View.VISIBLE
+                    rightArrowImageView.visibility = View.INVISIBLE
+                }
+
             }
 
         })
 
         how.text = exercise?.how
         why.text = exercise?.why
+
+        leftArrowImageView.visibility = View.INVISIBLE
+
+        leftArrowImageView.setOnClickListener{
+            viewPager.currentItem = 0
+        }
+        rightArrowImageView.setOnClickListener{
+            viewPager.currentItem = 1
+        }
 
     }
 
@@ -81,9 +101,7 @@ class ExerciseDetailFragment : Fragment() {
         override fun getItem(position: Int): Fragment {
 
             if (position == 0) {
-
                 return ImageFragment.newInstance(position, exercise!!.imageBefore)
-
             }
             return ImageFragment.newInstance(position, exercise!!.imageAfter)
         }

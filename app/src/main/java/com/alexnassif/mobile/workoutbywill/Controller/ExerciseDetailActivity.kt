@@ -1,7 +1,9 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.alexnassif.mobile.workoutbywill.Model.Exercise
 import com.alexnassif.mobile.workoutbywill.R
 import kotlinx.android.synthetic.main.activity_exercise_detail.*
@@ -19,9 +21,13 @@ class ExerciseDetailActivity : AppCompatActivity() {
                 .add(R.id.exerciseDetailActivityFrame, fragment, fragment.javaClass.simpleName)
                 .commit()
 
-        deleteActivityBtn.setOnClickListener{
-            this.finish()
-        }
+
+        toolbar_title.text = exercise.name
+
+        setSupportActionBar(ex_toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
     }
 }

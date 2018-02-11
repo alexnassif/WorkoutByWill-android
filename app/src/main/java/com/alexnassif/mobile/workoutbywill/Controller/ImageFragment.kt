@@ -43,13 +43,9 @@ class ImageFragment : Fragment() {
 
         if (mPageNumber == 0){
             beforeAfterTextView.text = "Before"
-            rightArrowImageView.visibility = View.VISIBLE
-            leftArrowImageView.visibility = View.INVISIBLE
         }
         else {
             beforeAfterTextView.text = "After"
-            rightArrowImageView.visibility = View.INVISIBLE
-            leftArrowImageView.visibility = View.VISIBLE
         }
 
         Glide.with(context).load(mImageUrl).into(beforeAfterImageView)
