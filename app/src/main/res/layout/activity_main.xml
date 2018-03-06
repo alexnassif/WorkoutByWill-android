@@ -28,7 +28,6 @@
             android:src="@drawable/logo"
             android:layout_gravity="center"/>
 
-
     </android.support.v7.widget.Toolbar>
 
 
