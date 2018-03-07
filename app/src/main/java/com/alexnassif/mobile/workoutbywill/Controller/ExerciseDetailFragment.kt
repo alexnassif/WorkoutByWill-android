@@ -32,7 +32,6 @@ class ExerciseDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             exercise = arguments.getParcelable(EXERCISE_KEY)
-            Log.d("array size",  exercise!!.images.get(1))
         }
     }
 
@@ -56,9 +55,13 @@ class ExerciseDetailFragment : Fragment() {
                     rightArrowImageView.visibility = View.VISIBLE
                 }
 
-                if(position == exercise!!.images.lastIndex){
+                else if(position == exercise!!.images.lastIndex){
                     leftArrowImageView.visibility = View.VISIBLE
                     rightArrowImageView.visibility = View.INVISIBLE
+                }
+                else{
+                    leftArrowImageView.visibility = View.VISIBLE
+                    rightArrowImageView.visibility = View.VISIBLE
                 }
 
             }
@@ -71,10 +74,14 @@ class ExerciseDetailFragment : Fragment() {
         leftArrowImageView.visibility = View.INVISIBLE
 
         leftArrowImageView.setOnClickListener{
-            viewPager.currentItem = 0
+
+            viewPager.currentItem -= 1
+
         }
         rightArrowImageView.setOnClickListener{
-            viewPager.currentItem = exercise!!.images.lastIndex
+
+            viewPager.currentItem += 1
+
         }
 
     }

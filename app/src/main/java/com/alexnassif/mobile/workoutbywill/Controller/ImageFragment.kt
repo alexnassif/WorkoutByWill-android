@@ -41,13 +41,8 @@ class ImageFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if (mPageNumber == 0){
-            beforeAfterTextView.text = "Before"
-        }
-        else {
-            beforeAfterTextView.text = "After"
-        }
 
+        beforeAfterTextView.text = (mPageNumber!! + 1).toString()
         Glide.with(context).load(mImageUrl).into(beforeAfterImageView)
     }
 
