@@ -35,7 +35,7 @@ class ExerciseAdapter(val context: Context, val exercises: MutableList<Exercise>
 
         fun bindExercise(exercise: Exercise, context: Context){
             exerciseName?.text = exercise.name
-            Glide.with(context).load(exercise.imageAfter).into(exerciseImage!!)
+            Glide.with(context).load(exercise.images.get(0)).into(exerciseImage!!)
 
             itemView.setOnClickListener {
                 itemClick(exercise)

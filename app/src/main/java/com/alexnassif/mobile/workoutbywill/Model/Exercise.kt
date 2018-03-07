@@ -12,26 +12,23 @@ class Exercise :Parcelable {
     lateinit var name: String
     lateinit var how: String
     lateinit var why: String
-    lateinit var imageAfter: String
-    lateinit var imageBefore: String
+    lateinit var images: ArrayList<String>
 
     constructor(){
 
     }
 
-    constructor(name: String, how: String, why: String, imageAfter: String, imageBefore: String){
+    constructor(name: String, how: String, why: String, images: ArrayList<String>){
         this.name = name!!
         this.how = how
         this.why = why
-        this.imageAfter = imageAfter
-        this.imageBefore = imageBefore
+        this.images = images
     }
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readString(),
-            parcel.readString()) {
+            parcel.readArrayList(String::class.java.classLoader) as ArrayList<String>) {
     }
 
     override fun writeToParcel(p0: Parcel?, p1: Int) {
@@ -39,8 +36,7 @@ class Exercise :Parcelable {
         p0?.writeString(name)
         p0?.writeString(how)
         p0?.writeString(why)
-        p0?.writeString(imageAfter)
-        p0?.writeString(imageBefore)
+        p0?.writeList(images)
 
     }
 

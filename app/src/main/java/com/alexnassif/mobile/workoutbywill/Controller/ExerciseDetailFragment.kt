@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class ExerciseDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             exercise = arguments.getParcelable(EXERCISE_KEY)
+            Log.d("array size",  exercise!!.images.get(1))
         }
     }
 
@@ -54,7 +56,7 @@ class ExerciseDetailFragment : Fragment() {
                     rightArrowImageView.visibility = View.VISIBLE
                 }
 
-                if(position == 1){
+                if(position == exercise!!.images.lastIndex){
                     leftArrowImageView.visibility = View.VISIBLE
                     rightArrowImageView.visibility = View.INVISIBLE
                 }
@@ -72,7 +74,7 @@ class ExerciseDetailFragment : Fragment() {
             viewPager.currentItem = 0
         }
         rightArrowImageView.setOnClickListener{
-            viewPager.currentItem = 1
+            viewPager.currentItem = exercise!!.images.lastIndex
         }
 
     }
@@ -86,7 +88,6 @@ class ExerciseDetailFragment : Fragment() {
     companion object {
        
         private val EXERCISE_KEY = "exercise"
-        private val NUM_PAGES = 2
 
         fun newInstance(exercise: Exercise): ExerciseDetailFragment {
             val fragment = ExerciseDetailFragment()
@@ -100,14 +101,11 @@ class ExerciseDetailFragment : Fragment() {
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {
 
-            if (position == 0) {
-                return ImageFragment.newInstance(position, exercise!!.imageBefore)
-            }
-            return ImageFragment.newInstance(position, exercise!!.imageAfter)
+            return ImageFragment.newInstance(position, image = exercise!!.images.get(position))
         }
 
         override fun getCount(): Int {
-            return NUM_PAGES
+            return exercise!!.images.size
         }
     }
 
