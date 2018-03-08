@@ -11,4 +11,9 @@
         android:checkable="false"
         android:title="@string/title_exercises" />
 
+    <item
+        android:id="@+id/navigation_sign_in"
+        android:checkable="false"
+        android:title="Patient Sign-in"/>
+
 </menu>

@@ -29,12 +29,12 @@ class ExerciseTypeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            type = arguments.getString(exersise_type)
+            type = arguments!!.getString(exersise_type)
         }
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_exercise_type, container, false)
@@ -46,10 +46,10 @@ class ExerciseTypeFragment : Fragment() {
 
             var gridLayoutManager = GridLayoutManager(context, 2)
             exerciseRecyclerView.layoutManager = gridLayoutManager
-            adapter = ExerciseAdapter(context, ex){exercise ->
+            adapter = ExerciseAdapter(context!!, ex){exercise ->
                 var fragment = ExerciseDetailFragment.newInstance(exercise)
 
-                fragmentManager
+                fragmentManager!!
                         .beginTransaction()
                         .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
                         .addToBackStack(fragment.javaClass.getSimpleName())

@@ -24,12 +24,12 @@ class ImageFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mPageNumber = arguments.getInt(arg_pageNumber)
-            mImageUrl = arguments.getString(imageUrl)
+            mPageNumber = arguments!!.getInt(arg_pageNumber)
+            mImageUrl = arguments!!.getString(imageUrl)
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
@@ -43,7 +43,7 @@ class ImageFragment : Fragment() {
 
 
         beforeAfterTextView.text = (mPageNumber!! + 1).toString()
-        Glide.with(context).load(mImageUrl).into(beforeAfterImageView)
+        Glide.with(context!!).load(mImageUrl).into(beforeAfterImageView)
     }
 
     fun getPageNumber(): Int? {

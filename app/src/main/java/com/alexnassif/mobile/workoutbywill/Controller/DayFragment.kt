@@ -32,13 +32,12 @@ class DayFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mDay = arguments.getString(DAY_PARAM)
-            mWorkout = arguments.getString(WOROUT_PARAM)
+            mDay = arguments!!.getString(DAY_PARAM)
+            mWorkout = arguments!!.getString(WOROUT_PARAM)
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_day, container, false)
     }
@@ -49,7 +48,7 @@ class DayFragment : Fragment() {
         layoutManager = LinearLayoutManager(context)
         dayRecyclerView.layoutManager = layoutManager
         DataService.getDayList(mWorkout!!, mDay!!) {dayList ->
-            adapter = WorkoutDetailAdapter(context, dayList) {
+            adapter = WorkoutDetailAdapter(context!!, dayList) {
              keyName, category   ->
 
                 DataService.getSingleExercise(category, keyName){ exercise

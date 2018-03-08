@@ -30,7 +30,7 @@ class WorkoutDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mWorkoutName = arguments.getString(WORKOUT_NAME)
+            mWorkoutName = arguments!!.getString(WORKOUT_NAME)
         }
 
     }
@@ -57,7 +57,7 @@ class WorkoutDetailFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_workout_detail, container, false)

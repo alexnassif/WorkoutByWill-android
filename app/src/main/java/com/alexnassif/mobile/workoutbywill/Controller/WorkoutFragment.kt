@@ -30,12 +30,12 @@ class WorkoutFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
-            mParam2 = arguments.getString(ARG_PARAM2)
+            mParam1 = arguments!!.getString(ARG_PARAM1)
+            mParam2 = arguments!!.getString(ARG_PARAM2)
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_workout, container, false)
@@ -48,10 +48,10 @@ class WorkoutFragment : Fragment() {
         list.add(Workout("randomWorkout"))
         var layoutMan = GridLayoutManager(context, 2)
         workoutRecyclerView.layoutManager = layoutMan
-        adapter = WorkoutRecyclerAdapter(context, list){workout ->
+        adapter = WorkoutRecyclerAdapter(context!!, list){workout ->
             var fragment = WorkoutDetailFragment.newInstance(workout.name)
 
-            fragmentManager
+            fragmentManager!!
                     .beginTransaction()
                     .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
                     .addToBackStack(fragment.javaClass.getSimpleName())

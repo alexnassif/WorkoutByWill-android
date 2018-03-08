@@ -37,12 +37,12 @@ class ExerciseFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         linearLayoutManager = LinearLayoutManager(context)
         recyclerViewBpEx.layoutManager = linearLayoutManager
-        adapter = BodyPartRecyclerAdapter(context, DataService.bpCategories) {
+        adapter = BodyPartRecyclerAdapter(context!!, DataService.bpCategories) {
 
             exType ->
             var fragment = ExerciseTypeFragment.newInstance(exType.title)
 
-                    fragmentManager
+                    fragmentManager!!
                     .beginTransaction()
                     .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
                     .addToBackStack(fragment.javaClass.getSimpleName())
@@ -53,7 +53,7 @@ class ExerciseFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_exercise, container, false)

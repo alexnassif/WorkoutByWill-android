@@ -31,7 +31,7 @@ class ExerciseDetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            exercise = arguments.getParcelable(EXERCISE_KEY)
+            exercise = arguments!!.getParcelable(EXERCISE_KEY)
         }
     }
 
@@ -86,7 +86,7 @@ class ExerciseDetailFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_exercise_detail, container, false)

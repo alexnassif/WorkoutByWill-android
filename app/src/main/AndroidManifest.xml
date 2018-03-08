@@ -18,8 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controller.ExerciseDetailActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".Controller.ExerciseDetailActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".Controller.SignInActivity"></activity>
     </application>
 
 </manifest>
