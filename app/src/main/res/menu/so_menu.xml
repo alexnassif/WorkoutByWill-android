@@ -3,5 +3,11 @@
 
         <item
             android:id="@+id/sign_out"
-            android:title="Sign Out"/>
+            android:title="Sign Out"
+            android:visible="true" />
+        <item
+            android:id="@+id/sign_in"
+            android:title="Sign In"
+            android:visible="true" />
+
 </menu>
