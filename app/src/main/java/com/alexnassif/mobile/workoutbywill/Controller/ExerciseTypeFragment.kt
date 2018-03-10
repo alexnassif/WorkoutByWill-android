@@ -37,17 +37,17 @@ class ExerciseTypeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_exercise_type, container, false)
+        return inflater.inflate(R.layout.fragment_exercise_type, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         DataService.getExercises(type!!){ ex ->
 
-            var gridLayoutManager = GridLayoutManager(context, 2)
+            val gridLayoutManager = GridLayoutManager(context, 2)
             exerciseRecyclerView.layoutManager = gridLayoutManager
             adapter = ExerciseAdapter(context!!, ex){exercise ->
-                var fragment = ExerciseDetailFragment.newInstance(exercise)
+                val fragment = ExerciseDetailFragment.newInstance(exercise)
 
                 fragmentManager!!
                         .beginTransaction()

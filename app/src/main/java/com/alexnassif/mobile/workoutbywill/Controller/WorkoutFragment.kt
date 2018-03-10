@@ -4,6 +4,8 @@ package com.alexnassif.mobile.workoutbywill.Controller
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,8 @@ import com.alexnassif.mobile.workoutbywill.Adapters.WorkoutRecyclerAdapter
 import com.alexnassif.mobile.workoutbywill.Model.Workout
 
 import com.alexnassif.mobile.workoutbywill.R
+import com.alexnassif.mobile.workoutbywill.Services.DataService
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_workout.*
 
 
@@ -26,6 +30,7 @@ class WorkoutFragment : Fragment() {
     private var mParam2: String? = null
 
     lateinit var adapter: WorkoutRecyclerAdapter
+    lateinit var paidAdapter: WorkoutRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +43,35 @@ class WorkoutFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_workout, container, false)
+        return inflater.inflate(R.layout.fragment_workout, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        if(FirebaseAuth.getInstance().currentUser != null) {
+
+            DataService.getPaidWorkoutList {individualList ->
+
+
+                var layoutIndividualWk = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                paid_recyclerView.layoutManager = layoutIndividualWk
+
+
+                paidAdapter = WorkoutRecyclerAdapter(context!!, individualList){
+
+                }
+
+                paid_recyclerView.adapter = paidAdapter
+                paid_recyclerView.setHasFixedSize(true)
+                paidWorkoutLbl.visibility = View.VISIBLE
+                paid_recyclerView.visibility = View.VISIBLE
+
+            }
+
+
+        }
+
 
         var list = mutableListOf<Workout>()
         list.add(Workout("randomWorkout"))

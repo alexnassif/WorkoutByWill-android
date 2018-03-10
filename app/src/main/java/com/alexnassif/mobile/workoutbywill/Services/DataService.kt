@@ -1,8 +1,11 @@
 package com.alexnassif.mobile.workoutbywill.Services
 
+import android.util.Log
 import com.alexnassif.mobile.workoutbywill.Model.Category
 import com.alexnassif.mobile.workoutbywill.Model.Exercise
 import com.alexnassif.mobile.workoutbywill.Model.ExerciseDetail
+import com.alexnassif.mobile.workoutbywill.Model.Workout
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 
@@ -14,12 +17,38 @@ object DataService {
     private var database = FirebaseDatabase.getInstance()!!
     private var exercisesRef = database.getReference("exercises")
 
+    fun getPaidWorkoutList(completion: (MutableList<Workout>) -> Unit){
+
+        val individualWorkouts = database.getReference(FirebaseAuth.getInstance().uid).child("listWorkouts")
+        val individualWList = mutableListOf<Workout>()
+
+        individualWorkouts.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError?) {
+
+            }
+
+            override fun onDataChange(workouts: DataSnapshot?) {
+                val children = workouts!!.children
+                children.forEach { x ->
+                    val workout = Workout(x.value.toString())
+                    individualWList.add(workout)
+                }
+                completion(individualWList)
+            }
+
+        })
+
+    }
+
     fun getDayList(workout: String, day: String, completion: (MutableList<ExerciseDetail>) -> Unit){
 
-        var dayRef = database.getReference(workout).child(day)
-        var detailList = mutableListOf<ExerciseDetail>()
+        val dayRef = database.getReference(workout).child(day)
+        val detailList = mutableListOf<ExerciseDetail>()
         dayRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot?) {
+
+                Log.d("snapshot", snapshot.toString())
+
                 val children = snapshot!!.children
                 children.forEach { childx ->
                     val keyName = childx.key
@@ -50,10 +79,7 @@ object DataService {
         exRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot?) {
 
-
-                var exercise: Exercise? = null
-
-                exercise = snapshot!!.getValue(Exercise::class.java)
+                val exercise = snapshot!!.getValue(Exercise::class.java)
 
                 completion(exercise!!)
 

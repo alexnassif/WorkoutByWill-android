@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
 
     lateinit var selectedFragment: Fragment
-    lateinit var mMenu: Menu
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -90,11 +89,11 @@ class MainActivity : AppCompatActivity() {
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         if(auth.currentUser != null){
             menu!!.findItem(R.id.sign_out).isVisible = true
-            menu!!.findItem(R.id.sign_in).isVisible = false
+            menu.findItem(R.id.sign_in).isVisible = false
         }
         else{
             menu!!.findItem(R.id.sign_in).isVisible = true
-            menu!!.findItem(R.id.sign_out).isVisible = false
+            menu.findItem(R.id.sign_out).isVisible = false
         }
 
         return true
@@ -104,11 +103,11 @@ class MainActivity : AppCompatActivity() {
 
         if(item!!.itemId == R.id.sign_out){
             AuthUI.getInstance().signOut(this).addOnCompleteListener {
-                
+                this.recreate()
             }
 
         }
-        if(item!!.itemId == R.id.sign_in){
+        if(item.itemId == R.id.sign_in){
             if(auth.currentUser != null){ //If user is signed in
 //                startActivity(Next Activity)
 

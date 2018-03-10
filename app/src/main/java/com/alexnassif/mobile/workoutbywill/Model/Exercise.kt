@@ -19,7 +19,7 @@ class Exercise :Parcelable {
     }
 
     constructor(name: String, how: String, why: String, images: ArrayList<String>){
-        this.name = name!!
+        this.name = name
         this.how = how
         this.why = why
         this.images = images

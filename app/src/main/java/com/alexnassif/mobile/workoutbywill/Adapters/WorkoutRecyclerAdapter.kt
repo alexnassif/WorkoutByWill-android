@@ -35,7 +35,7 @@ class WorkoutRecyclerAdapter(val context: Context, val workoutList: MutableList<
         val workoutImage = v?.findViewById<ImageView>(R.id.workoutImageView)
 
         fun bindWorkout(workout: Workout, context: Context){
-
+            workoutName!!.text = workout.name
             itemView.setOnClickListener { itemClick(workout) }
 
         }

@@ -26,7 +26,7 @@ class BodyPartRecyclerAdapter(val context: Context, val exCategories: List<Categ
     }
 
     override fun onBindViewHolder(holder: CellHolder, position: Int) {
-        holder?.bindCategory(exCategories[position], context)
+        holder.bindCategory(exCategories[position], context)
     }
 
     inner class CellHolder(v: View?, val itemClick: (Category) -> Unit): RecyclerView.ViewHolder(v){

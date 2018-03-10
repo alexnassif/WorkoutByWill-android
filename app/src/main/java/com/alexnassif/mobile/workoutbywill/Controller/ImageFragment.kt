@@ -33,7 +33,7 @@ class ImageFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
-        val rootView = inflater!!.inflate(R.layout.fragment_image, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_image, container, false)
 
         return rootView
     }
