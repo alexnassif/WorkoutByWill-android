@@ -39,15 +39,43 @@ object DataService {
         })
 
     }
+    fun getPaidWorkout(workout: String, day:String, completion: (MutableList<ExerciseDetail>) -> Unit){
 
+        val dayRef = database.getReference(FirebaseAuth.getInstance().uid).child(workout).child(day)
+        val detailList = mutableListOf<ExerciseDetail>()
+        dayRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot?) {
+
+
+
+                val children = snapshot!!.children
+                children.forEach { childx ->
+                    val keyName = childx.key
+                    val name = childx.child("exerciseName").value.toString()
+                    val reps = childx.child("reps").value.toString()
+                    val rest = childx.child("rest").value.toString()
+                    val sets = childx.child("sets").value.toString()
+                    val category = childx.child("category").value.toString()
+                    var exerciseDetail = ExerciseDetail(keyName, name, reps, rest, sets, category)
+                    detailList.add(exerciseDetail)
+
+                }
+
+                completion(detailList)
+            }
+
+            override fun onCancelled(error: DatabaseError?) {
+                println(error!!.message)
+            }
+        })
+
+    }
     fun getDayList(workout: String, day: String, completion: (MutableList<ExerciseDetail>) -> Unit){
 
         val dayRef = database.getReference(workout).child(day)
         val detailList = mutableListOf<ExerciseDetail>()
         dayRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot?) {
-
-                Log.d("snapshot", snapshot.toString())
 
                 val children = snapshot!!.children
                 children.forEach { childx ->
@@ -106,12 +134,6 @@ object DataService {
                     childx ->
 
                     val exercise = childx.getValue(Exercise::class.java)
-                    /*val name = childx.child("name").value.toString()
-                    val how = childx.child("how").value.toString()
-                    val why = childx.child("why").value.toString()
-                    val imageBefore = childx.child("imageBefore").value.toString()
-                    val imageAfter = childx.child("imageAfter").value.toString()
-                    var exercise = Exercise(name, how, why, imageBefore, imageAfter)*/
                     exerciseList.add(exercise!!)
 
                 }

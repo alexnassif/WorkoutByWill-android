@@ -1,6 +1,7 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -47,13 +48,11 @@ class ExerciseTypeFragment : Fragment() {
             val gridLayoutManager = GridLayoutManager(context, 2)
             exerciseRecyclerView.layoutManager = gridLayoutManager
             adapter = ExerciseAdapter(context!!, ex){exercise ->
-                val fragment = ExerciseDetailFragment.newInstance(exercise)
 
-                fragmentManager!!
-                        .beginTransaction()
-                        .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
-                        .addToBackStack(fragment.javaClass.getSimpleName())
-                        .commit()
+                val intent = Intent(context, ExerciseDetailActivity::class.java)
+                intent.putExtra("exercise", exercise)
+                startActivity(intent)
+
 
             }
             exerciseRecyclerView.adapter = adapter

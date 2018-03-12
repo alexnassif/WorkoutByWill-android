@@ -46,28 +46,37 @@ class WorkoutFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_workout, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if(FirebaseAuth.getInstance().currentUser != null) {
-
-            DataService.getPaidWorkoutList {individualList ->
 
 
-                var layoutIndividualWk = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                paid_recyclerView.layoutManager = layoutIndividualWk
+        DataService.getPaidWorkoutList { individualList ->
 
 
-                paidAdapter = WorkoutRecyclerAdapter(context!!, individualList){
+            var layoutIndividualWk = GridLayoutManager(context, 2)
+            paid_recyclerView.layoutManager = layoutIndividualWk
 
-                }
 
-                paid_recyclerView.adapter = paidAdapter
-                paid_recyclerView.setHasFixedSize(true)
-                paidWorkoutLbl.visibility = View.VISIBLE
-                paid_recyclerView.visibility = View.VISIBLE
+            paidAdapter = WorkoutRecyclerAdapter(context!!, individualList) { workout ->
+
+                var fragment = WorkoutPaidDetailFragment.newInstance(workout.name)
+
+                fragmentManager!!
+                        .beginTransaction()
+                        .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
+                        .addToBackStack(fragment.javaClass.getSimpleName())
+                        .commit()
 
             }
+
+            paid_recyclerView.adapter = paidAdapter
+            paid_recyclerView.setHasFixedSize(true)
 
 
         }

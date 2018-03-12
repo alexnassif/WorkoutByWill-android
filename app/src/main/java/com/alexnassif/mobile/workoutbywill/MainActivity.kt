@@ -56,15 +56,28 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        selectedFragment = WorkoutFragment.newInstance("hello", "world")
-        supportFragmentManager
-                .beginTransaction()
-                .add(R.id.content_frame, selectedFragment, selectedFragment.javaClass.getSimpleName())
-                .commit()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         setSupportActionBar(app_toolbar)
+        if(auth.currentUser != null){
+            selectedFragment = WorkoutFragment.newInstance("hello", "world")
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.content_frame, selectedFragment, selectedFragment.javaClass.getSimpleName())
+                    .commit()
 
-
+        }
+        else {
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setIsSmartLockEnabled(!BuildConfig.DEBUG)
+                            .setAvailableProviders(
+                                    Arrays.asList(AuthUI.IdpConfig.EmailBuilder().build()))
+                            .setLogo(R.drawable.logo)      // Set logo drawable
+                            .setTheme(R.style.AppTheme)
+                            .build(),
+                    RC_SIGN_IN)
+        }
 
     }
 
@@ -76,7 +89,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        invalidateOptionsMenu()
 
     }
 
@@ -86,33 +98,11 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        if(auth.currentUser != null){
-            menu!!.findItem(R.id.sign_out).isVisible = true
-            menu.findItem(R.id.sign_in).isVisible = false
-        }
-        else{
-            menu!!.findItem(R.id.sign_in).isVisible = true
-            menu.findItem(R.id.sign_out).isVisible = false
-        }
-
-        return true
-    }
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         if(item!!.itemId == R.id.sign_out){
             AuthUI.getInstance().signOut(this).addOnCompleteListener {
-                this.recreate()
-            }
 
-        }
-        if(item.itemId == R.id.sign_in){
-            if(auth.currentUser != null){ //If user is signed in
-//                startActivity(Next Activity)
-
-            }
-            else {
                 startActivityForResult(
                         AuthUI.getInstance()
                                 .createSignInIntentBuilder()
@@ -121,7 +111,9 @@ class MainActivity : AppCompatActivity() {
                                         Arrays.asList(AuthUI.IdpConfig.EmailBuilder().build()))
                                 .build(),
                         RC_SIGN_IN)
+
             }
+
         }
 
         return super.onOptionsItemSelected(item)
@@ -140,19 +132,31 @@ class MainActivity : AppCompatActivity() {
                     Checks if the User sign in was successful
                  */
 //                startActivity(Next Activity)
-                Toast.makeText(this, "signed in", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Signed in", Toast.LENGTH_LONG).show()
+                /*val frag = supportFragmentManager.findFragmentByTag("WorkoutFragment")
+                val ft = supportFragmentManager.beginTransaction()
+                ft.detach(frag)
+                ft.attach(frag)
+                ft.commit()*/
+
+                selectedFragment = WorkoutFragment.newInstance("hello", "world")
+                supportFragmentManager
+                        .beginTransaction()
+                        .add(R.id.content_frame, selectedFragment, selectedFragment.javaClass.getSimpleName())
+                        .commit()
+
                 return
             }
             else {
                 if(response == null){
                     //If no response from the Server
-                    Toast.makeText(this, "not signed in", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Not Signed in", Toast.LENGTH_LONG).show()
                     return
                 }
 
             }
         }
-        Toast.makeText(this, "unknown signed in", Toast.LENGTH_LONG).show() //if the sign in response was unknown
+        Toast.makeText(this, "unknown Sign-in", Toast.LENGTH_LONG).show() //if the sign in response was unknown
     }
 
     companion object {
