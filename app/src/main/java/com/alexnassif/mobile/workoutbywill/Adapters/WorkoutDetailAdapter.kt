@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.alexnassif.mobile.workoutbywill.Model.Workout
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import com.alexnassif.mobile.workoutbywill.Model.ExerciseDetail
 import com.alexnassif.mobile.workoutbywill.R
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.workout_detail_cell.view.*
 
 /**
@@ -36,12 +38,14 @@ class WorkoutDetailAdapter(val context: Context, val workoutDetailList: MutableL
         val sets = v?.findViewById<TextView>(R.id.setsTextView)
         val rest = v?.findViewById<TextView>(R.id.restTextView)
         val exName = v?.findViewById<TextView>(R.id.exerciseWkDetailLbl)
+        val image = v?.findViewById<ImageView>(R.id.workoutDetailImageView)
 
         fun bindWorkoutDetail(context: Context, exerciseIns: ExerciseDetail){
             reps?.text = exerciseIns.reps
             sets?.text = exerciseIns.sets
             rest?.text = exerciseIns.rest
             exName?.text = exerciseIns.exerciseName
+            Glide.with(context).load(exerciseIns.imageLocation).into(image!!)
 
             itemView.setOnClickListener {
                 itemClick(exerciseIns.keyName, exerciseIns.category)

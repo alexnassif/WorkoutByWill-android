@@ -5,5 +5,5 @@ package com.alexnassif.mobile.workoutbywill.Model
  */
 class ExerciseDetail(val keyName: String, val exerciseName: String,
                      val reps: String, val rest: String, val sets: String,
-                     val category: String) {
+                     val category: String, val imageLocation: String) {
 }

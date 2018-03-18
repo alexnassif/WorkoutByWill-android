@@ -56,7 +56,8 @@ object DataService {
                     val rest = childx.child("rest").value.toString()
                     val sets = childx.child("sets").value.toString()
                     val category = childx.child("category").value.toString()
-                    var exerciseDetail = ExerciseDetail(keyName, name, reps, rest, sets, category)
+                    val imageLocation = childx.child("image").value.toString()
+                    var exerciseDetail = ExerciseDetail(keyName, name, reps, rest, sets, category, imageLocation)
                     detailList.add(exerciseDetail)
 
                 }
@@ -85,7 +86,8 @@ object DataService {
                     val rest = childx.child("rest").value.toString()
                     val sets = childx.child("sets").value.toString()
                     val category = childx.child("category").value.toString()
-                    var exerciseDetail = ExerciseDetail(keyName, name, reps, rest, sets, category)
+                    val imageLocation = childx.child("image").value.toString()
+                    var exerciseDetail = ExerciseDetail(keyName, name, reps, rest, sets, category, imageLocation)
                     detailList.add(exerciseDetail)
 
                 }
