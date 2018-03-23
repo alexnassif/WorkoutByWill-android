@@ -102,6 +102,12 @@ class MainActivity : AppCompatActivity() {
 
         if(item!!.itemId == R.id.sign_out){
             AuthUI.getInstance().signOut(this).addOnCompleteListener {
+                var ft = supportFragmentManager.fragments
+                var fragManager = supportFragmentManager.beginTransaction()
+                for (x in ft){
+                    fragManager.remove(x)
+                }
+                fragManager.commit()
 
                 startActivityForResult(
                         AuthUI.getInstance()
