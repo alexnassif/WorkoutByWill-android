@@ -123,8 +123,8 @@ object DataService {
 
     fun getExercises(type: String, completion: (MutableList<Exercise>) -> Unit) {
 
-        var referenceType = exercisesRef.child(type)
-        var exerciseList = mutableListOf<Exercise>()
+        val referenceType = exercisesRef.child(type)
+        val exerciseList = mutableListOf<Exercise>()
         referenceType.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError?) {
                 println(error!!.message)
@@ -150,6 +150,27 @@ object DataService {
 
     }
 
+    fun getWellnessPrograms(completion: (MutableList<Workout>) -> Unit){
+
+        val wellnessRef = database.getReference("wellnessprograms")
+        val list = mutableListOf<Workout>()
+
+        wellnessRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError?) {
+
+            }
+
+            override fun onDataChange(wellnessSnapshot: DataSnapshot?) {
+                val children = wellnessSnapshot!!.children
+
+                children.forEach { childx ->
+                    list.add(Workout(childx.value.toString()))
+                }
+                completion(list)
+            }
+
+        })
+    }
 
     val bpCategories = listOf(
 

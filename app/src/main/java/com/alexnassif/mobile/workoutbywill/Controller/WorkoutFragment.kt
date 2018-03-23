@@ -81,22 +81,23 @@ class WorkoutFragment : Fragment() {
 
         }
 
-
-        var list = mutableListOf<Workout>()
-        list.add(Workout("randomWorkout"))
         var layoutMan = GridLayoutManager(context, 2)
         workoutRecyclerView.layoutManager = layoutMan
-        adapter = WorkoutRecyclerAdapter(context!!, list){workout ->
-            var fragment = WorkoutDetailFragment.newInstance(workout.name)
 
-            fragmentManager!!
-                    .beginTransaction()
-                    .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
-                    .addToBackStack(fragment.javaClass.getSimpleName())
-                    .commit()
+        DataService.getWellnessPrograms { wellnessList ->
+            adapter = WorkoutRecyclerAdapter(context!!, wellnessList) { workout ->
+                var fragment = WorkoutDetailFragment.newInstance(workout.name)
+
+                fragmentManager!!
+                        .beginTransaction()
+                        .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
+                        .addToBackStack(fragment.javaClass.getSimpleName())
+                        .commit()
+            }
+            workoutRecyclerView.adapter = adapter
+            workoutRecyclerView.setHasFixedSize(true)
         }
-        workoutRecyclerView.adapter = adapter
-        workoutRecyclerView.setHasFixedSize(true)
+
 
 
     }
