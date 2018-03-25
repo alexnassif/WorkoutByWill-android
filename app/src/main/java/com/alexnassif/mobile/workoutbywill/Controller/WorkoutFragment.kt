@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_workout.*
 class WorkoutFragment : Fragment() {
 
     lateinit var adapter: WorkoutRecyclerAdapter
-    lateinit var paidAdapter: WorkoutRecyclerAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,33 +46,6 @@ class WorkoutFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-
-
-        DataService.getPaidWorkoutList { individualList ->
-
-
-            var layoutIndividualWk = GridLayoutManager(context, 2)
-            paid_recyclerView.layoutManager = layoutIndividualWk
-
-
-            paidAdapter = WorkoutRecyclerAdapter(context!!, individualList) { workout ->
-
-                var fragment = WorkoutPaidDetailFragment.newInstance(workout.name)
-
-                fragmentManager!!
-                        .beginTransaction()
-                        .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
-                        .addToBackStack(fragment.javaClass.getSimpleName())
-                        .commit()
-
-            }
-
-            paid_recyclerView.adapter = paidAdapter
-            paid_recyclerView.setHasFixedSize(true)
-
-
-        }
 
         var layoutMan = GridLayoutManager(context, 2)
         workoutRecyclerView.layoutManager = layoutMan
@@ -97,7 +70,7 @@ class WorkoutFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(param1: String, param2: String): WorkoutFragment {
+        fun newInstance(): WorkoutFragment {
             val fragment = WorkoutFragment()
 
             return fragment

@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.alexnassif.mobile.workoutbywill.Controller.ExerciseFragment
+import com.alexnassif.mobile.workoutbywill.Controller.PaidWorkoutFragment
 import com.alexnassif.mobile.workoutbywill.Controller.WorkoutFragment
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.BuildConfig
@@ -30,8 +31,13 @@ class MainActivity : AppCompatActivity() {
 
         item ->
         when (item.itemId) {
+            R.id.navigation_my_workouts -> {
+                selectedFragment = PaidWorkoutFragment.newInstance()
+                addFragment(selectedFragment)
+                return@OnNavigationItemSelectedListener true
+            }
             R.id.navigation_home -> {
-                selectedFragment = WorkoutFragment.newInstance("hello", "world")
+                selectedFragment = WorkoutFragment.newInstance()
                 addFragment(selectedFragment)
                 return@OnNavigationItemSelectedListener true
             }
@@ -59,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         setSupportActionBar(app_toolbar)
         if(auth.currentUser != null){
-            selectedFragment = WorkoutFragment.newInstance("hello", "world")
+            selectedFragment = PaidWorkoutFragment.newInstance()
             supportFragmentManager
                     .beginTransaction()
                     .add(R.id.content_frame, selectedFragment, selectedFragment.javaClass.getSimpleName())
@@ -145,7 +151,7 @@ class MainActivity : AppCompatActivity() {
                 ft.attach(frag)
                 ft.commit()*/
 
-                selectedFragment = WorkoutFragment.newInstance("hello", "world")
+                selectedFragment = PaidWorkoutFragment.newInstance()
                 supportFragmentManager
                         .beginTransaction()
                         .add(R.id.content_frame, selectedFragment, selectedFragment.javaClass.getSimpleName())

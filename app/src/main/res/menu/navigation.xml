@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/navigation_my_workouts"
+        android:checkable="false"
+        android:icon="@mipmap/ic_assignment_ind_white_24dp"
+        android:title="@string/my_workouts" />
     <item
         android:id="@+id/navigation_home"
         android:checkable="false"
+        android:icon="@mipmap/ic_assignment_white_24dp"
         android:title="@string/title_workouts" />
 
     <item
         android:id="@+id/navigation_exercises"
         android:checkable="false"
+        android:icon="@mipmap/ic_fitness_center_white_24dp"
         android:title="@string/title_exercises" />
 
 </menu>
