@@ -15,7 +15,7 @@ class ExerciseDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_exercise_detail)
 
         val exercise = intent.getParcelableExtra<Exercise>("exercise")
-        var fragment = ExerciseDetailFragment.newInstance(exercise)
+        val fragment = ExerciseDetailFragment.newInstance(exercise)
 
         supportFragmentManager.beginTransaction()
                 .add(R.id.exerciseDetailActivityFrame, fragment, fragment.javaClass.simpleName)

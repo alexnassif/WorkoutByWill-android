@@ -55,6 +55,7 @@ class ExerciseTypeFragment : Fragment() {
 
 
             }
+            exTypeProgressBar.visibility = View.INVISIBLE
             exerciseRecyclerView.adapter = adapter
             exerciseRecyclerView.setHasFixedSize(true)
         }

@@ -33,13 +33,13 @@ class PaidWorkoutFragment : Fragment() {
 
         DataService.getPaidWorkoutList { individualList ->
 
-            var layoutIndividualWk = GridLayoutManager(context, 2)
+            val layoutIndividualWk = GridLayoutManager(context, 2)
             paid_recyclerView.layoutManager = layoutIndividualWk
 
 
             paidAdapter = WorkoutRecyclerAdapter(context!!, individualList) { workout ->
 
-                var fragment = WorkoutPaidDetailFragment.newInstance(workout.name)
+                val fragment = WorkoutPaidDetailFragment.newInstance(workout.name)
 
                 fragmentManager!!
                         .beginTransaction()
@@ -48,7 +48,7 @@ class PaidWorkoutFragment : Fragment() {
                         .commit()
 
             }
-
+            paidWorkoutProgressBar.visibility = View.INVISIBLE
             paid_recyclerView.adapter = paidAdapter
             paid_recyclerView.setHasFixedSize(true)
 

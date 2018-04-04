@@ -1,6 +1,7 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,10 @@ import android.view.ViewGroup
 
 import com.alexnassif.mobile.workoutbywill.R
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.fragment_image.*
 
 
@@ -41,9 +46,19 @@ class ImageFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
         beforeAfterTextView.text = (mPageNumber!! + 1).toString()
-        Glide.with(context!!).load(mImageUrl).into(beforeAfterImageView)
+        Glide.with(context!!).load(mImageUrl).listener(object : RequestListener<Drawable> {
+            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                return true
+            }
+
+            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                imageProgressBar.visibility = View.INVISIBLE
+                return false
+            }
+
+        }).into(beforeAfterImageView)
+        //imageProgressBar.visibility = View.INVISIBLE
     }
 
     fun getPageNumber(): Int? {

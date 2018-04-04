@@ -47,12 +47,12 @@ class WorkoutFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        var layoutMan = GridLayoutManager(context, 2)
+        val layoutMan = GridLayoutManager(context, 2)
         workoutRecyclerView.layoutManager = layoutMan
 
         DataService.getWellnessPrograms { wellnessList ->
             adapter = WorkoutRecyclerAdapter(context!!, wellnessList) { workout ->
-                var fragment = WorkoutDetailFragment.newInstance(workout.name)
+                val fragment = WorkoutDetailFragment.newInstance(workout.name)
 
                 fragmentManager!!
                         .beginTransaction()
@@ -60,6 +60,7 @@ class WorkoutFragment : Fragment() {
                         .addToBackStack(fragment.javaClass.getSimpleName())
                         .commit()
             }
+            workoutProgressBar.visibility = View.INVISIBLE
             workoutRecyclerView.adapter = adapter
             workoutRecyclerView.setHasFixedSize(true)
         }
