@@ -49,7 +49,7 @@ class ImageFragment : Fragment() {
         beforeAfterTextView.text = (mPageNumber!! + 1).toString()
         Glide.with(context!!).load(mImageUrl).listener(object : RequestListener<Drawable> {
             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                return true
+                return false
             }
 
             override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {

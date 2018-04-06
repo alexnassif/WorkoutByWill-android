@@ -64,6 +64,7 @@ class PaidDayFragment : Fragment() {
 
             dayRecyclerView.adapter = adapter
             dayRecyclerView.setHasFixedSize(true)
+            dayFragmentProgressBar.visibility = View.INVISIBLE
         }
 
     }
