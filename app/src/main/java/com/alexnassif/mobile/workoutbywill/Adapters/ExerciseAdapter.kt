@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import com.alexnassif.mobile.workoutbywill.Model.Exercise
@@ -23,6 +24,7 @@ class ExerciseAdapter(val context: Context, val exercises: MutableList<Exercise>
 
     override fun onBindViewHolder(holder: ExerciseHolder, position: Int) {
         holder.bindExercise(exercises.get(position), context)
+
     }
 
     override fun getItemCount(): Int {
@@ -30,8 +32,8 @@ class ExerciseAdapter(val context: Context, val exercises: MutableList<Exercise>
     }
 
     inner class ExerciseHolder(v: View?, val itemClick: (Exercise) -> Unit): RecyclerView.ViewHolder(v){
-        val exerciseName = v?.findViewById<TextView>(R.id.exerciseTextView)
-        val exerciseImage = v?.findViewById<ImageView>(R.id.exerciseImageView)
+        private val exerciseName = v?.findViewById<TextView>(R.id.exerciseTextView)
+        private val exerciseImage = v?.findViewById<ImageView>(R.id.exerciseImageView)
 
         fun bindExercise(exercise: Exercise, context: Context){
             exerciseName?.text = exercise.name

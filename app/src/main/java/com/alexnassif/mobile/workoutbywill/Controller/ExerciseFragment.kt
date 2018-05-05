@@ -5,9 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
 import com.alexnassif.mobile.workoutbywill.Adapters.BodyPartRecyclerAdapter
 import com.alexnassif.mobile.workoutbywill.R
 import com.alexnassif.mobile.workoutbywill.Services.DataService
@@ -47,8 +51,32 @@ class ExerciseFragment : Fragment() {
                     .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
                     .addToBackStack(fragment.javaClass.getSimpleName())
                     .commit()
+
         }
         recyclerViewBpEx.adapter = adapter
+        /*recyclerViewBpEx.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener{
+            override fun onPreDraw(): Boolean {
+                recyclerViewBpEx.viewTreeObserver.removeOnPreDrawListener(this)
+                Log.d("recycler1" , recyclerViewBpEx.childCount.toString())
+                for(i: Int in 0 until recyclerViewBpEx.childCount){
+                    Log.d("recycler2" , i.toString())
+                    val v = recyclerViewBpEx.getChildAt(i)
+
+
+
+
+                    v.alpha = 0.0f
+
+                    v.animate().translationY(100f).alpha(2.0f).setDuration(500).setStartDelay((i * 500).toLong()).start()
+                }
+                return true
+            }
+
+        })*/
+
+        val resId = R.anim.layout_animation_slide_right
+        val animation = AnimationUtils.loadLayoutAnimation(context, resId)
+        recyclerViewBpEx.layoutAnimation = animation
         recyclerViewBpEx.setHasFixedSize(true)
 
     }

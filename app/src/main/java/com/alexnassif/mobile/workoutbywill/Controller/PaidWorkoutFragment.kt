@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import com.alexnassif.mobile.workoutbywill.Adapters.WorkoutRecyclerAdapter
 
 import com.alexnassif.mobile.workoutbywill.R
@@ -26,13 +27,8 @@ class PaidWorkoutFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
         DataService.getPaidWorkoutList { individualList ->
-
+            paidWorkoutProgressBar.visibility = View.INVISIBLE
             val layoutIndividualWk = GridLayoutManager(context, 2)
             paid_recyclerView.layoutManager = layoutIndividualWk
 
@@ -48,12 +44,20 @@ class PaidWorkoutFragment : Fragment() {
                         .commit()
 
             }
-            paidWorkoutProgressBar.visibility = View.INVISIBLE
+
             paid_recyclerView.adapter = paidAdapter
+            paid_recyclerView.scheduleLayoutAnimation()
             paid_recyclerView.setHasFixedSize(true)
 
 
         }
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

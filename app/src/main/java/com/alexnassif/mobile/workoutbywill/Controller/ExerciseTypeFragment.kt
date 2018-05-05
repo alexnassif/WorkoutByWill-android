@@ -33,16 +33,6 @@ class ExerciseTypeFragment : Fragment() {
             type = arguments!!.getString(exersise_type)
         }
 
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exercise_type, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         DataService.getExercises(type!!){ ex ->
 
             val gridLayoutManager = GridLayoutManager(context, 2)
@@ -56,9 +46,25 @@ class ExerciseTypeFragment : Fragment() {
 
             }
             exTypeProgressBar.visibility = View.INVISIBLE
+
             exerciseRecyclerView.adapter = adapter
+            exerciseRecyclerView.scheduleLayoutAnimation()
             exerciseRecyclerView.setHasFixedSize(true)
+
         }
+
+
+
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_exercise_type, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
 
     }

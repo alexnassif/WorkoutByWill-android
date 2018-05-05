@@ -62,6 +62,7 @@ class WorkoutFragment : Fragment() {
             }
             workoutProgressBar.visibility = View.INVISIBLE
             workoutRecyclerView.adapter = adapter
+            workoutRecyclerView.scheduleLayoutAnimation()
             workoutRecyclerView.setHasFixedSize(true)
         }
 
