@@ -17,7 +17,7 @@ object DataService {
     private var database = FirebaseDatabase.getInstance()!!
     private var exercisesRef = database.getReference("exercises")
 
-    fun getPaidWorkoutList(completion: (MutableList<Workout>) -> Unit){
+    fun getPaidWorkoutList(completion: (List<Workout>) -> Unit){
 
         val individualWorkouts = database.getReference(FirebaseAuth.getInstance().uid).child("listWorkouts")
         val individualWList = mutableListOf<Workout>()
@@ -150,7 +150,7 @@ object DataService {
 
     }
 
-    fun getWellnessPrograms(completion: (MutableList<Workout>) -> Unit){
+    fun getWellnessPrograms(completion: (List<Workout>) -> Unit){
 
         val wellnessRef = database.getReference("wellnessprograms")
         val list = mutableListOf<Workout>()

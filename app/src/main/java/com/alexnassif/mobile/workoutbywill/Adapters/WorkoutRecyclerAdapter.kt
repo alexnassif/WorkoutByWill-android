@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.workout_cell.view.*
 /**
  * Created by raymond on 1/27/18.
  */
-class WorkoutRecyclerAdapter(val context: Context, val workoutList: MutableList<Workout>, val itemClick: (Workout) -> Unit)
+class WorkoutRecyclerAdapter(val context: Context, var workoutList: List<Workout>, val itemClick: (Workout) -> Unit)
     :RecyclerView.Adapter<WorkoutRecyclerAdapter.WorkoutHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): WorkoutHolder{
@@ -33,6 +33,10 @@ class WorkoutRecyclerAdapter(val context: Context, val workoutList: MutableList<
     override fun onBindViewHolder(holder: WorkoutHolder, position: Int) {
         holder.bindWorkout(workoutList.get(position), context)
 
+    }
+
+    fun setList(workoutList: List<Workout>){
+        this.workoutList = workoutList
     }
 
     inner class WorkoutHolder(v:View?, val itemClick:(Workout) -> Unit):RecyclerView.ViewHolder(v) {

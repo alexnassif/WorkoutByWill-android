@@ -1,6 +1,8 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -12,6 +14,7 @@ import com.alexnassif.mobile.workoutbywill.Adapters.WorkoutRecyclerAdapter
 
 import com.alexnassif.mobile.workoutbywill.R
 import com.alexnassif.mobile.workoutbywill.Services.DataService
+import com.alexnassif.mobile.workoutbywill.ViewModel.PaidViewModel
 import kotlinx.android.synthetic.main.fragment_paid_workout.*
 
 
@@ -23,17 +26,19 @@ import kotlinx.android.synthetic.main.fragment_paid_workout.*
 class PaidWorkoutFragment : Fragment() {
 
     lateinit var paidAdapter: WorkoutRecyclerAdapter
+    lateinit var viewModel: PaidViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        DataService.getPaidWorkoutList { individualList ->
-            paidWorkoutProgressBar.visibility = View.INVISIBLE
+
+        viewModel = ViewModelProviders.of(this).get(PaidViewModel::class.java)
+
+        viewModel.getPaidList().observe(this, Observer {individualList ->
             val layoutIndividualWk = GridLayoutManager(context, 2)
             paid_recyclerView.layoutManager = layoutIndividualWk
-
-
-            paidAdapter = WorkoutRecyclerAdapter(context!!, individualList) { workout ->
+            paidWorkoutProgressBar.visibility = View.INVISIBLE
+            paidAdapter = WorkoutRecyclerAdapter(context!!, individualList!!) { workout ->
 
                 val fragment = WorkoutPaidDetailFragment.newInstance(workout.name)
 
@@ -49,8 +54,8 @@ class PaidWorkoutFragment : Fragment() {
             paid_recyclerView.scheduleLayoutAnimation()
             paid_recyclerView.setHasFixedSize(true)
 
+        })
 
-        }
 
     }
 
