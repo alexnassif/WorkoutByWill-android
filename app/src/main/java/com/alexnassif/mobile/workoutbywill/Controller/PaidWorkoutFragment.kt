@@ -31,8 +31,12 @@ class PaidWorkoutFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         viewModel = ViewModelProviders.of(this).get(PaidViewModel::class.java)
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         viewModel.getPaidList().observe(this, Observer {individualList ->
             val layoutIndividualWk = GridLayoutManager(context, 2)
@@ -55,12 +59,6 @@ class PaidWorkoutFragment : Fragment() {
             paid_recyclerView.setHasFixedSize(true)
 
         })
-
-
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
 
     }

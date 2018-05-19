@@ -66,10 +66,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(app_toolbar)
         if(auth.currentUser != null){
             selectedFragment = PaidWorkoutFragment.newInstance()
-            supportFragmentManager
-                    .beginTransaction()
-                    .add(R.id.content_frame, selectedFragment, selectedFragment.javaClass.getSimpleName())
-                    .commit()
+            addFragment(selectedFragment)
 
         }
         else {

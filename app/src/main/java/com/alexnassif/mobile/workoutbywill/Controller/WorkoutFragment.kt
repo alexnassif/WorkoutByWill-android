@@ -32,11 +32,31 @@ class WorkoutFragment : Fragment() {
     lateinit var viewModel: WorkoutViewModel
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(WorkoutViewModel::class.java)
+
+
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_workout, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         viewModel.getWellnessList().observe(this, Observer {wellnessList ->
 
@@ -58,22 +78,6 @@ class WorkoutFragment : Fragment() {
             workoutRecyclerView.setHasFixedSize(true)
 
         })
-
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_workout, container, false)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
 
     }

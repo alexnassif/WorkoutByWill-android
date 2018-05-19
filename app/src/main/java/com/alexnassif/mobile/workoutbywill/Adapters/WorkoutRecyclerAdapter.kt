@@ -37,6 +37,7 @@ class WorkoutRecyclerAdapter(val context: Context, var workoutList: List<Workout
 
     fun setList(workoutList: List<Workout>){
         this.workoutList = workoutList
+        notifyDataSetChanged()
     }
 
     inner class WorkoutHolder(v:View?, val itemClick:(Workout) -> Unit):RecyclerView.ViewHolder(v) {
