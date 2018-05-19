@@ -34,13 +34,29 @@ class WorkoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        workoutRecyclerView.layoutManager = GridLayoutManager(context, 2)
+
+        adapter = WorkoutRecyclerAdapter(context!!, mutableListOf()) { workout ->
+            val fragment = WorkoutDetailFragment.newInstance(workout.name)
+
+            fragmentManager!!
+                    .beginTransaction()
+                    .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
+                    .addToBackStack(fragment.javaClass.getSimpleName())
+                    .commit()
+        }
+
+
+        workoutRecyclerView.adapter = adapter
+        workoutRecyclerView.setHasFixedSize(true)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(WorkoutViewModel::class.java)
-
 
     }
 
@@ -60,22 +76,9 @@ class WorkoutFragment : Fragment() {
 
         viewModel.getWellnessList().observe(this, Observer {wellnessList ->
 
-            val layoutMan = GridLayoutManager(context, 2)
-            workoutRecyclerView.layoutManager = layoutMan
-
-            adapter = WorkoutRecyclerAdapter(context!!, wellnessList!!) { workout ->
-                val fragment = WorkoutDetailFragment.newInstance(workout.name)
-
-                fragmentManager!!
-                        .beginTransaction()
-                        .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
-                        .addToBackStack(fragment.javaClass.getSimpleName())
-                        .commit()
-            }
+            adapter.setList(wellnessList!!)
             workoutProgressBar.visibility = View.INVISIBLE
-            workoutRecyclerView.adapter = adapter
             workoutRecyclerView.scheduleLayoutAnimation()
-            workoutRecyclerView.setHasFixedSize(true)
 
         })
 

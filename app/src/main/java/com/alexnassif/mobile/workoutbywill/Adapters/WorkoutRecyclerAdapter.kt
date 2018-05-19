@@ -27,6 +27,7 @@ class WorkoutRecyclerAdapter(val context: Context, var workoutList: List<Workout
     }
 
     override fun getItemCount(): Int {
+
         return workoutList.count()
     }
 

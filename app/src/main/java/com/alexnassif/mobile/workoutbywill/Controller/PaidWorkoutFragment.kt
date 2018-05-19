@@ -35,29 +35,34 @@ class PaidWorkoutFragment : Fragment() {
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        paid_recyclerView.layoutManager = GridLayoutManager(context, 2)
+        paidAdapter = WorkoutRecyclerAdapter(context!!, mutableListOf()) { workout ->
+
+            val fragment = WorkoutPaidDetailFragment.newInstance(workout.name)
+
+            fragmentManager!!
+                    .beginTransaction()
+                    .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
+                    .addToBackStack(fragment.javaClass.getSimpleName())
+                    .commit()
+
+        }
+
+        paid_recyclerView.adapter = paidAdapter
+        paid_recyclerView.setHasFixedSize(true)
+
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         viewModel.getPaidList().observe(this, Observer {individualList ->
-            val layoutIndividualWk = GridLayoutManager(context, 2)
-            paid_recyclerView.layoutManager = layoutIndividualWk
+
             paidWorkoutProgressBar.visibility = View.INVISIBLE
-            paidAdapter = WorkoutRecyclerAdapter(context!!, individualList!!) { workout ->
-
-                val fragment = WorkoutPaidDetailFragment.newInstance(workout.name)
-
-                fragmentManager!!
-                        .beginTransaction()
-                        .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
-                        .addToBackStack(fragment.javaClass.getSimpleName())
-                        .commit()
-
-            }
-
-            paid_recyclerView.adapter = paidAdapter
+            paidAdapter.setList(individualList!!)
             paid_recyclerView.scheduleLayoutAnimation()
-            paid_recyclerView.setHasFixedSize(true)
-
         })
 
 
