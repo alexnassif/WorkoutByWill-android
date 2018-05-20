@@ -12,8 +12,10 @@ class ExerciseViewModel: ViewModel() {
 
     fun getExercises(type: String): MutableLiveData<List<Exercise>>{
 
-        DataService.getExercises(type){
-            exerciseList.postValue(it)
+        if(exerciseList.value == null) {
+            DataService.getExercises(type) {
+                exerciseList.postValue(it)
+            }
         }
 
         return exerciseList

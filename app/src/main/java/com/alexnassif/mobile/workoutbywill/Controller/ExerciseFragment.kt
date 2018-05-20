@@ -70,10 +70,6 @@ class ExerciseFragment : Fragment() {
 
     // TODO: Rename method, update argument and hook method into UI event
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
-    }
 
     override fun onDetach() {
         super.onDetach()
@@ -82,13 +78,6 @@ class ExerciseFragment : Fragment() {
 
     companion object {
 
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment ExerciseFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         fun newInstance(): ExerciseFragment {
             val fragment = ExerciseFragment()
 

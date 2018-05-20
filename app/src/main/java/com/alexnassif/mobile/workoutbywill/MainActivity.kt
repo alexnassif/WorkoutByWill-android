@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
-    private fun addFragment(fragment: Fragment) {
+    fun addFragment(fragment: Fragment) {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
