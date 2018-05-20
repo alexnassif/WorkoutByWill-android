@@ -65,8 +65,11 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         setSupportActionBar(app_toolbar)
         if(auth.currentUser != null){
-            selectedFragment = PaidWorkoutFragment.newInstance()
-            addFragment(selectedFragment)
+
+            if(savedInstanceState == null) {
+                selectedFragment = PaidWorkoutFragment.newInstance()
+                addFragment(selectedFragment)
+            }
 
         }
         else {

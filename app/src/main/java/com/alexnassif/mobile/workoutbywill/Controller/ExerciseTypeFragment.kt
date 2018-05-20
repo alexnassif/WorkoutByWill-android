@@ -1,6 +1,8 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,6 +16,7 @@ import com.alexnassif.mobile.workoutbywill.Model.Exercise
 
 import com.alexnassif.mobile.workoutbywill.R
 import com.alexnassif.mobile.workoutbywill.Services.DataService
+import com.alexnassif.mobile.workoutbywill.ViewModel.ExerciseViewModel
 import kotlinx.android.synthetic.main.fragment_exercise_type.*
 
 
@@ -26,6 +29,7 @@ class ExerciseTypeFragment : Fragment() {
 
     private var type: String? = null
     private lateinit var adapter: ExerciseAdapter
+    private lateinit var viewModel: ExerciseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,30 +37,26 @@ class ExerciseTypeFragment : Fragment() {
             type = arguments!!.getString(exersise_type)
         }
 
-        DataService.getExercises(type!!){ ex ->
-
-            val gridLayoutManager = GridLayoutManager(context, 2)
-            exerciseRecyclerView.layoutManager = gridLayoutManager
-            adapter = ExerciseAdapter(context!!, ex){exercise ->
-
-                val intent = Intent(context, ExerciseDetailActivity::class.java)
-                intent.putExtra("exercise", exercise)
-                startActivity(intent)
-
-
-            }
-            exTypeProgressBar.visibility = View.INVISIBLE
-
-            exerciseRecyclerView.adapter = adapter
-            exerciseRecyclerView.scheduleLayoutAnimation()
-            exerciseRecyclerView.setHasFixedSize(true)
-
-        }
-
-
+        viewModel = ViewModelProviders.of(this).get(ExerciseViewModel::class.java)
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        exerciseRecyclerView.layoutManager = GridLayoutManager(context, 2)
+
+        adapter = ExerciseAdapter(context!!, mutableListOf()){exercise ->
+
+            val intent = Intent(context, ExerciseDetailActivity::class.java)
+            intent.putExtra("exercise", exercise)
+            startActivity(intent)
+
+        }
+        exerciseRecyclerView.adapter = adapter
+        exerciseRecyclerView.setHasFixedSize(true)
+
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -65,6 +65,12 @@ class ExerciseTypeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        viewModel.getExercises(type!!).observe(activity!!, Observer {
+            adapter.setList(it!!)
+            exTypeProgressBar.visibility = View.INVISIBLE
+            exerciseRecyclerView.scheduleLayoutAnimation()
+        })
 
 
     }

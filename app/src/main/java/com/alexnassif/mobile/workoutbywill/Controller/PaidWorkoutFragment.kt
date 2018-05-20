@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +34,7 @@ class PaidWorkoutFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(PaidViewModel::class.java)
 
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,13 +60,12 @@ class PaidWorkoutFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.getPaidList().observe(this, Observer {individualList ->
+        viewModel.getPaidList().observe(this, Observer { individualList ->
 
             paidWorkoutProgressBar.visibility = View.INVISIBLE
             paidAdapter.setList(individualList!!)
             paid_recyclerView.scheduleLayoutAnimation()
         })
-
 
     }
 

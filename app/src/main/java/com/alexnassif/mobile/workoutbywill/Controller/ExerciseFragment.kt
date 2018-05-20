@@ -54,25 +54,6 @@ class ExerciseFragment : Fragment() {
 
         }
         recyclerViewBpEx.adapter = adapter
-        /*recyclerViewBpEx.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener{
-            override fun onPreDraw(): Boolean {
-                recyclerViewBpEx.viewTreeObserver.removeOnPreDrawListener(this)
-                Log.d("recycler1" , recyclerViewBpEx.childCount.toString())
-                for(i: Int in 0 until recyclerViewBpEx.childCount){
-                    Log.d("recycler2" , i.toString())
-                    val v = recyclerViewBpEx.getChildAt(i)
-
-
-
-
-                    v.alpha = 0.0f
-
-                    v.animate().translationY(100f).alpha(2.0f).setDuration(500).setStartDelay((i * 500).toLong()).start()
-                }
-                return true
-            }
-
-        })*/
 
         val resId = R.anim.layout_animation_slide_right
         val animation = AnimationUtils.loadLayoutAnimation(context, resId)

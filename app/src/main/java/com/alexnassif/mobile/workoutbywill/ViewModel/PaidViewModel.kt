@@ -1,6 +1,5 @@
 package com.alexnassif.mobile.workoutbywill.ViewModel
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.alexnassif.mobile.workoutbywill.Model.Workout
@@ -10,7 +9,7 @@ class PaidViewModel: ViewModel() {
 
     private val paidList: MutableLiveData<List<Workout>> = MutableLiveData()
 
-    fun getPaidList(): LiveData<List<Workout>> {
+    fun getPaidList(): MutableLiveData<List<Workout>> {
 
         if(paidList.value == null){
             DataService.getPaidWorkoutList {paidL ->

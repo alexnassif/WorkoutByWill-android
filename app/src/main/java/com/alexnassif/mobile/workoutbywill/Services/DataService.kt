@@ -18,7 +18,7 @@ object DataService {
     private var exercisesRef = database.getReference("exercises")
 
     fun getPaidWorkoutList(completion: (List<Workout>) -> Unit){
-
+        Log.d("fetch", "datafetchpaid")
         val individualWorkouts = database.getReference(FirebaseAuth.getInstance().uid).child("listWorkouts")
         val individualWList = mutableListOf<Workout>()
 
@@ -122,7 +122,7 @@ object DataService {
     }
 
     fun getExercises(type: String, completion: (MutableList<Exercise>) -> Unit) {
-
+        Log.d("exercisefetch", type)
         val referenceType = exercisesRef.child(type)
         val exerciseList = mutableListOf<Exercise>()
         referenceType.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -151,7 +151,7 @@ object DataService {
     }
 
     fun getWellnessPrograms(completion: (List<Workout>) -> Unit){
-
+        Log.d("well", "datafetchwell")
         val wellnessRef = database.getReference("wellnessprograms")
         val list = mutableListOf<Workout>()
 

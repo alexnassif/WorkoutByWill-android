@@ -10,7 +10,7 @@ class WorkoutViewModel: ViewModel() {
 
     private val wellnessList: MutableLiveData<List<Workout>> = MutableLiveData()
 
-    fun getWellnessList(): LiveData<List<Workout>> {
+    fun getWellnessList(): MutableLiveData<List<Workout>> {
 
         if(wellnessList.value == null){
 
