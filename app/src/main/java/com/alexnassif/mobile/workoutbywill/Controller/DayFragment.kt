@@ -1,11 +1,14 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +16,8 @@ import com.alexnassif.mobile.workoutbywill.Adapters.WorkoutDetailAdapter
 
 import com.alexnassif.mobile.workoutbywill.R
 import com.alexnassif.mobile.workoutbywill.Services.DataService
+import com.alexnassif.mobile.workoutbywill.ViewModel.DayViewModel
+import com.alexnassif.mobile.workoutbywill.ViewModel.WorkoutViewModel
 import kotlinx.android.synthetic.main.fragment_day.*
 
 
@@ -26,8 +31,8 @@ class DayFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var mDay: String? = null
     private var mWorkout: String? = null
-    private lateinit var layoutManager: LinearLayoutManager
     private lateinit var adapter: WorkoutDetailAdapter
+    private lateinit var viewModel: DayViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +40,8 @@ class DayFragment : Fragment() {
             mDay = arguments!!.getString(DAY_PARAM)
             mWorkout = arguments!!.getString(WOROUT_PARAM)
         }
+
+        viewModel = ViewModelProviders.of(this).get(DayViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,30 +49,39 @@ class DayFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_day, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        layoutManager = LinearLayoutManager(context)
-        dayRecyclerView.layoutManager = layoutManager
-        DataService.getDayList(mWorkout!!, mDay!!) {dayList ->
-            adapter = WorkoutDetailAdapter(context!!, dayList) {
-             keyName, category   ->
+        dayRecyclerView.layoutManager = LinearLayoutManager(context)
 
-                DataService.getSingleExercise(category, keyName){ exercise
-                   -> val intent = Intent(context, ExerciseDetailActivity::class.java)
-                    intent.putExtra("exercise", exercise)
-                    startActivity(intent)
+        adapter = WorkoutDetailAdapter(context!!, mutableListOf()) {
+            keyName, category   ->
 
-                }
-
+            DataService.getSingleExercise(category, keyName){ exercise
+                -> val intent = Intent(context, ExerciseDetailActivity::class.java)
+                intent.putExtra("exercise", exercise)
+                startActivity(intent)
 
             }
 
-            dayRecyclerView.adapter = adapter
-            dayRecyclerView.setHasFixedSize(true)
-            dayFragmentProgressBar.visibility = View.INVISIBLE
-        }
 
+        }
+        dayRecyclerView.adapter = adapter
+        dayRecyclerView.setHasFixedSize(true)
+    }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewModel.getDayList(mDay!!, mWorkout!!).observe(this, Observer {
+            adapter.setList(it!!)
+            dayFragmentProgressBar.visibility = View.INVISIBLE
+        })
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("destroyDay", mDay)
     }
 
     companion object {

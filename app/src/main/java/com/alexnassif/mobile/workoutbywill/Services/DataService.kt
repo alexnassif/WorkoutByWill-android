@@ -72,7 +72,7 @@ object DataService {
 
     }
     fun getDayList(workout: String, day: String, completion: (MutableList<ExerciseDetail>) -> Unit){
-
+        Log.d("dayfetch", day)
         val dayRef = database.getReference(workout).child(day)
         val detailList = mutableListOf<ExerciseDetail>()
         dayRef.addListenerForSingleValueEvent(object : ValueEventListener{
@@ -175,8 +175,8 @@ object DataService {
     val bpCategories = listOf(
 
             Category("neckandshoulders", "Neck and Shoulders" ,"placeholderpic" ),
-            Category("kneeandankle", "Knee and Ankle", "placeholderpic" ),
-            Category("lowerbackandhip", "Lower Back and Hip", "placeholderpic" )
+            Category("kneeandankle", "Knee and Ankle", "kneeankle" ),
+            Category("lowerbackandhip", "Lower Back and Hip", "sidebridge1" )
 
     )
 }

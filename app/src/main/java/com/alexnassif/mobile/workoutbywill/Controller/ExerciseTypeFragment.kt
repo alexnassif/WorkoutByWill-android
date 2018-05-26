@@ -38,7 +38,7 @@ class ExerciseTypeFragment : Fragment() {
             type = arguments!!.getString(exersise_type)
         }
 
-        viewModel = ViewModelProviders.of(activity!!).get(ExerciseViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ExerciseViewModel::class.java)
 
     }
 
@@ -67,7 +67,7 @@ class ExerciseTypeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.getExercises(type!!).observe(activity!!, Observer {
+        viewModel.getExercises(type!!).observe(this, Observer {
             adapter.setList(it!!)
             exTypeProgressBar.visibility = View.INVISIBLE
             exerciseRecyclerView.scheduleLayoutAnimation()

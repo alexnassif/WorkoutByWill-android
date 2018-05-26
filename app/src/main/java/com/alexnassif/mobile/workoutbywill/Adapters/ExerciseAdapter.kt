@@ -27,7 +27,7 @@ class ExerciseAdapter(val context: Context, var exercises: List<Exercise>, val i
 
     }
 
-    public fun setList(exList: List<Exercise>){
+    fun setList(exList: List<Exercise>){
         this.exercises = exList
         notifyDataSetChanged()
     }

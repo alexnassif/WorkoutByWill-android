@@ -81,7 +81,11 @@ class WorkoutDetailFragment : Fragment() {
         }
     }
 
-    private inner class DaySlidePagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
+    private inner class DaySlidePagerAdapter(fm: FragmentManager?) : SmartFragmentStatePagerAdapter(fm!!) {
+
+        var array = arrayOfNulls<DayFragment>(NUM_PAGES)
+
+
         override fun getItem(position: Int): Fragment {
             println("the position here is " + position)
             when (position){
@@ -95,6 +99,8 @@ class WorkoutDetailFragment : Fragment() {
             }
             return DayFragment.newInstance(mWorkoutName!!,"monday")
         }
+
+
 
         override fun getCount(): Int {
             return NUM_PAGES
