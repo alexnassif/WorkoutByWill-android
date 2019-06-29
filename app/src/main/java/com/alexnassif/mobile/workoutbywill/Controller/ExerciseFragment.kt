@@ -1,17 +1,13 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
-import android.content.Context
-import android.content.Intent
+//import android.app.Fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
-import android.view.animation.TranslateAnimation
 import com.alexnassif.mobile.workoutbywill.Adapters.BodyPartRecyclerAdapter
 import com.alexnassif.mobile.workoutbywill.R
 import com.alexnassif.mobile.workoutbywill.Services.DataService

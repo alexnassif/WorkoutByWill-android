@@ -1,20 +1,20 @@
 package com.alexnassif.mobile.workoutbywill
 
 import android.app.Activity
+import android.arch.lifecycle.MutableLiveData
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import com.alexnassif.mobile.workoutbywill.Controller.ExerciseFragment
 import com.alexnassif.mobile.workoutbywill.Controller.PaidWorkoutFragment
 import com.alexnassif.mobile.workoutbywill.Controller.WorkoutFragment
+import com.alexnassif.mobile.workoutbywill.Model.Program
+import com.alexnassif.mobile.workoutbywill.Repositories.Repository
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.BuildConfig
 import com.firebase.ui.auth.IdpResponse
@@ -25,7 +25,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
 
-    lateinit var selectedFragment: Fragment
+    private lateinit var selectedFragment: Fragment
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
-    fun addFragment(fragment: Fragment) {
+    private fun addFragment(fragment: Fragment) {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.content_frame, fragment, fragment.javaClass.getSimpleName())
@@ -64,6 +64,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         setSupportActionBar(app_toolbar)
+        var dat: MutableLiveData<List<Program>> = MutableLiveData()
+        val repository: Repository = Repository()
+        dat = repository.getExercises()
+        //Log.d("exfromser" , dat.value.toString())
         if(auth.currentUser != null){
 
             if(savedInstanceState == null) {

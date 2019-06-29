@@ -1,23 +1,22 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
 
+//import android.app.Fragment
+
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.alexnassif.mobile.workoutbywill.Adapters.WorkoutDetailAdapter
-
 import com.alexnassif.mobile.workoutbywill.R
 import com.alexnassif.mobile.workoutbywill.Services.DataService
 import com.alexnassif.mobile.workoutbywill.ViewModel.DayViewModel
-import com.alexnassif.mobile.workoutbywill.ViewModel.WorkoutViewModel
 import kotlinx.android.synthetic.main.fragment_day.*
 
 
