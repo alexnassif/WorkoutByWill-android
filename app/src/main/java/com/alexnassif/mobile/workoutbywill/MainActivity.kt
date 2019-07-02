@@ -1,20 +1,17 @@
 package com.alexnassif.mobile.workoutbywill
 
 import android.app.Activity
-import android.arch.lifecycle.MutableLiveData
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.alexnassif.mobile.workoutbywill.Controller.ExerciseFragment
 import com.alexnassif.mobile.workoutbywill.Controller.PaidWorkoutFragment
 import com.alexnassif.mobile.workoutbywill.Controller.WorkoutFragment
-import com.alexnassif.mobile.workoutbywill.Model.Program
-import com.alexnassif.mobile.workoutbywill.Repositories.Repository
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.BuildConfig
 import com.firebase.ui.auth.IdpResponse
@@ -64,10 +61,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         setSupportActionBar(app_toolbar)
-        var dat: MutableLiveData<List<Program>> = MutableLiveData()
-        val repository: Repository = Repository()
-        dat = repository.getExercises()
-        //Log.d("exfromser" , dat.value.toString())
         if(auth.currentUser != null){
 
             if(savedInstanceState == null) {

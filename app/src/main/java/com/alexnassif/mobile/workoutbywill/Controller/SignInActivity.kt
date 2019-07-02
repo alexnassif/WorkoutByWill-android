@@ -2,9 +2,9 @@ package com.alexnassif.mobile.workoutbywill.Controller
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import com.google.android.material.snackbar.Snackbar
 import com.alexnassif.mobile.workoutbywill.R
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.AuthUI.*

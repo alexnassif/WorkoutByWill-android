@@ -1,7 +1,7 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.alexnassif.mobile.workoutbywill.Model.Exercise

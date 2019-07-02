@@ -1,25 +1,19 @@
 package com.alexnassif.mobile.workoutbywill.ViewModel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import com.alexnassif.mobile.workoutbywill.Model.Workout
-import com.alexnassif.mobile.workoutbywill.Services.DataService
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.alexnassif.mobile.workoutbywill.Model.Program
+import com.alexnassif.mobile.workoutbywill.Repositories.WorkoutRepository
 
-class WorkoutViewModel: ViewModel() {
+class WorkoutViewModel(private val repository: WorkoutRepository) : ViewModel() {
 
-    private val wellnessList: MutableLiveData<List<Workout>> = MutableLiveData()
+    private var wellnessList: MutableLiveData<List<Program>> = MutableLiveData()
 
-    fun getWellnessList(): MutableLiveData<List<Workout>> {
+    fun getWellnessList(): MutableLiveData<List<Program>> {
 
         if(wellnessList.value == null){
 
-            DataService.getWellnessPrograms {list ->
-
-                wellnessList.postValue(list)
-
-            }
-
+            wellnessList = repository.getExercises()
         }
 
         return wellnessList

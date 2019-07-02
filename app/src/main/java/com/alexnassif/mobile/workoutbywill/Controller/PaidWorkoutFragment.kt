@@ -1,20 +1,16 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
-import android.util.Log
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import com.alexnassif.mobile.workoutbywill.Adapters.WorkoutRecyclerAdapter
-
 import com.alexnassif.mobile.workoutbywill.R
-import com.alexnassif.mobile.workoutbywill.Services.DataService
 import com.alexnassif.mobile.workoutbywill.ViewModel.PaidViewModel
 import kotlinx.android.synthetic.main.fragment_paid_workout.*
 
@@ -63,7 +59,7 @@ class PaidWorkoutFragment : Fragment() {
         viewModel.getPaidList().observe(this, Observer { individualList ->
 
             paidWorkoutProgressBar.visibility = View.INVISIBLE
-            paidAdapter.setList(individualList!!)
+            //paidAdapter.setList(individualList!!)
             paid_recyclerView.scheduleLayoutAnimation()
         })
 

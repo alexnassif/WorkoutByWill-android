@@ -1,10 +1,10 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import android.view.ViewGroup
 import android.util.SparseArray
-import android.support.v4.app.FragmentStatePagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import android.view.View
 
 
