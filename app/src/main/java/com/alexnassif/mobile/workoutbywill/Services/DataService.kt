@@ -6,7 +6,10 @@ import com.alexnassif.mobile.workoutbywill.Model.Exercise
 import com.alexnassif.mobile.workoutbywill.Model.ExerciseDetail
 import com.alexnassif.mobile.workoutbywill.Model.Workout
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 /**
@@ -57,8 +60,8 @@ object DataService {
                     val sets = childx.child("sets").value.toString()
                     val category = childx.child("category").value.toString()
                     val imageLocation = childx.child("image").value.toString()
-                    var exerciseDetail = ExerciseDetail(keyName, name, reps, rest, sets, category, imageLocation)
-                    detailList.add(exerciseDetail)
+                   // var exerciseDetail = ExerciseDetail(keyName, name, reps, rest, sets, category, imageLocation)
+                    //detailList.add(exerciseDetail)
 
                 }
 
@@ -87,8 +90,8 @@ object DataService {
                     val sets = childx.child("sets").value.toString()
                     val category = childx.child("category").value.toString()
                     val imageLocation = childx.child("image").value.toString()
-                    var exerciseDetail = ExerciseDetail(keyName, name, reps, rest, sets, category, imageLocation)
-                    detailList.add(exerciseDetail)
+                    //var exerciseDetail = ExerciseDetail(keyName, name, reps, rest, sets, category, imageLocation)
+                    //detailList.add(exerciseDetail)
 
                 }
 

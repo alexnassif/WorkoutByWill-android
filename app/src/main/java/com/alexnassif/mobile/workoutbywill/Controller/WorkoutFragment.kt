@@ -34,7 +34,7 @@ class WorkoutFragment : Fragment() {
         workoutRecyclerView.layoutManager = GridLayoutManager(context, 2)
 
         adapter = WorkoutRecyclerAdapter(context!!, mutableListOf()) { workout ->
-            val fragment = WorkoutDetailFragment.newInstance(workout.name)
+            val fragment = WorkoutDetailFragment.newInstance(workout.id)
 
             fragmentManager!!
                     .beginTransaction()
@@ -50,7 +50,7 @@ class WorkoutFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val exerciseViewModelFactory: WorkoutViewModelFactory = InjectUtils.provideExerciseViewModelFactory(context!!.applicationContext)
+        val exerciseViewModelFactory: WorkoutViewModelFactory = InjectUtils.provideExerciseViewModelFactory()
         viewModel = ViewModelProviders.of(this, exerciseViewModelFactory).get(WorkoutViewModel::class.java)
 
     }

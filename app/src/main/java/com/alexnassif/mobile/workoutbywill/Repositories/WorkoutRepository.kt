@@ -2,6 +2,8 @@ package com.alexnassif.mobile.workoutbywill.Repositories
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.alexnassif.mobile.workoutbywill.Model.Exercise
+import com.alexnassif.mobile.workoutbywill.Model.ExerciseDetail
 import com.alexnassif.mobile.workoutbywill.Model.Program
 import com.alexnassif.mobile.workoutbywill.Services.ProgramService
 import retrofit2.Call
@@ -34,6 +36,41 @@ class WorkoutRepository private constructor(private val exerciseService: Program
 
         })
         return data
+    }
+
+    fun getWorkoutdetail(map: Map<String, String>): MutableLiveData<List<ExerciseDetail>>{
+        val data = MutableLiveData<List<ExerciseDetail>>()
+
+        exerciseService.getProgramDetails(map).enqueue(object : Callback<List<ExerciseDetail>>{
+            override fun onResponse(call: Call<List<ExerciseDetail>>, response: Response<List<ExerciseDetail>>) {
+                data.value = response.body()
+            }
+
+            override fun onFailure(call: Call<List<ExerciseDetail>>, t: Throwable) {
+
+            }
+
+        })
+
+        return data;
+
+    }
+
+    fun getExerciseList(): MutableLiveData<List<Exercise>>{
+        val data = MutableLiveData<List<Exercise>>()
+
+        exerciseService.getExerciseList().enqueue(object : Callback<List<Exercise>>{
+            override fun onFailure(call: Call<List<Exercise>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(call: Call<List<Exercise>>, response: Response<List<Exercise>>) {
+                data.value = response.body()
+            }
+
+        })
+
+        return data;
     }
 
     companion object{

@@ -3,31 +3,26 @@ package com.alexnassif.mobile.workoutbywill.Controller
 
 //import android.app.Fragment
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexnassif.mobile.workoutbywill.Adapters.WorkoutDetailAdapter
 import com.alexnassif.mobile.workoutbywill.R
 import com.alexnassif.mobile.workoutbywill.Services.DataService
+import com.alexnassif.mobile.workoutbywill.Utilities.InjectUtils
 import com.alexnassif.mobile.workoutbywill.ViewModel.DayViewModel
 import kotlinx.android.synthetic.main.fragment_day.*
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DayFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DayFragment : Fragment() {
 
-    // TODO: Rename and change types of parameters
     private var mDay: String? = null
     private var mWorkout: String? = null
     private lateinit var adapter: WorkoutDetailAdapter
@@ -39,8 +34,8 @@ class DayFragment : Fragment() {
             mDay = arguments!!.getString(DAY_PARAM)
             mWorkout = arguments!!.getString(WOROUT_PARAM)
         }
-
-        viewModel = ViewModelProviders.of(this).get(DayViewModel::class.java)
+        val dayVMFactory = InjectUtils.provideDayViewModelFactory()
+        viewModel = ViewModelProviders.of(this, dayVMFactory).get(DayViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -70,8 +65,8 @@ class DayFragment : Fragment() {
     }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        viewModel.getDayList(mDay!!, mWorkout!!).observe(this, Observer {
+        viewModel.setDay(mWorkout!!, mDay!!)
+        viewModel.getDay().observe(this, Observer {
             adapter.setList(it!!)
             dayFragmentProgressBar.visibility = View.INVISIBLE
         })
@@ -84,19 +79,10 @@ class DayFragment : Fragment() {
     }
 
     companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
         private val DAY_PARAM = "day"
         private val WOROUT_PARAM = "workout"
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DayFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         fun newInstance(workoutName: String, day: String): DayFragment {
             val fragment = DayFragment()
             val args = Bundle()

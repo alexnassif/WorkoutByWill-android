@@ -1,8 +1,8 @@
 package com.alexnassif.mobile.workoutbywill.Utilities
 
-import android.content.Context
 import com.alexnassif.mobile.workoutbywill.Repositories.WorkoutRepository
 import com.alexnassif.mobile.workoutbywill.Services.ProgramService
+import com.alexnassif.mobile.workoutbywill.ViewModel.DayVMFactory
 import com.alexnassif.mobile.workoutbywill.ViewModel.WorkoutViewModelFactory
 
 object InjectUtils {
@@ -12,8 +12,12 @@ object InjectUtils {
         return WorkoutRepository.getInstance(exerciseService)
     }
 
-    fun provideExerciseViewModelFactory(context: Context): WorkoutViewModelFactory {
+    fun provideExerciseViewModelFactory(): WorkoutViewModelFactory {
         val repository = getExerciseRepository()
         return WorkoutViewModelFactory(repository)
+    }
+
+    fun provideDayViewModelFactory(): DayVMFactory {
+        return DayVMFactory(getExerciseRepository())
     }
 }

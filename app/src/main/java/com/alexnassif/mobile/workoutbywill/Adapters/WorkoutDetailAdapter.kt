@@ -51,7 +51,7 @@ class WorkoutDetailAdapter(val context: Context, var workoutDetailList: List<Exe
             Glide.with(context).load(exerciseIns.imageLocation).into(image!!)
 
             itemView.setOnClickListener {
-                itemClick(exerciseIns.keyName, exerciseIns.category)
+                //itemClick(exerciseIns.exerciseId)
             }
         }
 
