@@ -1,10 +1,7 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import com.alexnassif.mobile.workoutbywill.Model.Exercise
+import androidx.appcompat.app.AppCompatActivity
 import com.alexnassif.mobile.workoutbywill.R
 import kotlinx.android.synthetic.main.activity_exercise_detail.*
 
@@ -14,7 +11,7 @@ class ExerciseDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise_detail)
 
-        val exercise = intent.getParcelableExtra<Exercise>("exercise")
+        val exercise = intent.getIntExtra("exercise", 1)
         val fragment = ExerciseDetailFragment.newInstance(exercise)
 
         supportFragmentManager.beginTransaction()
@@ -22,7 +19,7 @@ class ExerciseDetailActivity : AppCompatActivity() {
                 .commit()
 
 
-        toolbar_title.text = exercise.name
+        //toolbar_title.text = exercise.name
 
         setSupportActionBar(ex_toolbar)
 

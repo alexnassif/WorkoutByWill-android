@@ -2,19 +2,20 @@ package com.alexnassif.mobile.workoutbywill.Controller
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.ViewPager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.viewpager.widget.ViewPager
 import com.alexnassif.mobile.workoutbywill.Model.Exercise
-
 import com.alexnassif.mobile.workoutbywill.R
+import com.alexnassif.mobile.workoutbywill.Utilities.InjectUtils
+import com.alexnassif.mobile.workoutbywill.ViewModel.ExerciseViewModel
 import kotlinx.android.synthetic.main.fragment_exercise_detail.*
-import kotlinx.android.synthetic.main.fragment_image.*
 
 
 /**
@@ -24,52 +25,63 @@ import kotlinx.android.synthetic.main.fragment_image.*
  */
 class ExerciseDetailFragment : Fragment() {
 
-    private var exercise: Exercise? = null
-
+    private var exerciseId: Int? = null
+    var exercise: Exercise = Exercise("", "", "", mutableListOf(), "")
     private var pagerAdapter: ScreenSlidePagerAdapter? = null
+    lateinit var viewModel: ExerciseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            exercise = arguments!!.getParcelable(EXERCISE_KEY)
+            exerciseId = arguments!!.getInt(EXERCISE_KEY)
         }
+
+        val factory = exerciseId?.let { InjectUtils.provideExerciseViewModelFactory(it) }
+        viewModel = ViewModelProviders.of(this, factory).get(ExerciseViewModel::class.java)
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        pagerAdapter = ScreenSlidePagerAdapter(childFragmentManager)
-        viewPager.adapter = pagerAdapter
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        viewModel.getExercise().observe(this, Observer {
+            exercise = it
+            how.text = it.how
+            why.text = it.why
 
-            override fun onPageScrollStateChanged(state: Int) {
-            }
+            pagerAdapter = ScreenSlidePagerAdapter(childFragmentManager)
+            viewPager.adapter = pagerAdapter
+            viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-            }
-            override fun onPageSelected(position: Int) {
-
-                if(position == 0) {
-                    leftArrowImageView.visibility = View.INVISIBLE
-                    rightArrowImageView.visibility = View.VISIBLE
+                override fun onPageScrollStateChanged(state: Int) {
                 }
 
-                else if(position == exercise!!.images.lastIndex){
-                    leftArrowImageView.visibility = View.VISIBLE
-                    rightArrowImageView.visibility = View.INVISIBLE
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
                 }
-                else{
-                    leftArrowImageView.visibility = View.VISIBLE
-                    rightArrowImageView.visibility = View.VISIBLE
+                override fun onPageSelected(position: Int) {
+
+                    if(position == 0) {
+                        leftArrowImageView.visibility = View.INVISIBLE
+                        rightArrowImageView.visibility = View.VISIBLE
+                    }
+
+                    else if(position == exercise!!.imageLocation.lastIndex){
+                        leftArrowImageView.visibility = View.VISIBLE
+                        rightArrowImageView.visibility = View.INVISIBLE
+                    }
+                    else{
+                        leftArrowImageView.visibility = View.VISIBLE
+                        rightArrowImageView.visibility = View.VISIBLE
+                    }
+
                 }
 
-            }
-
+            })
         })
 
-        how.text = exercise?.how
-        why.text = exercise?.why
+
+
 
         leftArrowImageView.visibility = View.INVISIBLE
 
@@ -96,10 +108,10 @@ class ExerciseDetailFragment : Fragment() {
        
         private val EXERCISE_KEY = "exercise"
 
-        fun newInstance(exercise: Exercise): ExerciseDetailFragment {
+        fun newInstance(exercise: Int): ExerciseDetailFragment {
             val fragment = ExerciseDetailFragment()
             val args = Bundle()
-            args.putParcelable(EXERCISE_KEY, exercise)
+            args.putInt(EXERCISE_KEY, exercise)
             fragment.arguments = args
             return fragment
         }
@@ -108,11 +120,12 @@ class ExerciseDetailFragment : Fragment() {
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {
 
-            return ImageFragment.newInstance(position, image = exercise!!.images.get(position))
+            return ImageFragment.newInstance(position, image = exercise.imageLocation.get(position))
         }
 
         override fun getCount(): Int {
-            return exercise!!.images.size
+            return exercise.imageLocation.size
+
         }
     }
 

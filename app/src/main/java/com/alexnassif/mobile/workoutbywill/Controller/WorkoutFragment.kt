@@ -83,9 +83,8 @@ class WorkoutFragment : Fragment() {
     companion object {
 
         fun newInstance(): WorkoutFragment {
-            val fragment = WorkoutFragment()
 
-            return fragment
+            return WorkoutFragment()
         }
     }
 

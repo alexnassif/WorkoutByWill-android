@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexnassif.mobile.workoutbywill.Adapters.WorkoutDetailAdapter
 import com.alexnassif.mobile.workoutbywill.R
-import com.alexnassif.mobile.workoutbywill.Services.DataService
 import com.alexnassif.mobile.workoutbywill.Utilities.InjectUtils
 import com.alexnassif.mobile.workoutbywill.ViewModel.DayViewModel
 import kotlinx.android.synthetic.main.fragment_day.*
@@ -48,15 +47,10 @@ class DayFragment : Fragment() {
 
         dayRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        adapter = WorkoutDetailAdapter(context!!, mutableListOf()) {
-            keyName, category   ->
-
-            DataService.getSingleExercise(category, keyName){ exercise
-                -> val intent = Intent(context, ExerciseDetailActivity::class.java)
-                intent.putExtra("exercise", exercise)
+        adapter = WorkoutDetailAdapter(context!!, mutableListOf()) {exerciseId ->
+            val intent = Intent(context, ExerciseDetailActivity::class.java)
+                intent.putExtra("exercise", exerciseId)
                 startActivity(intent)
-
-            }
 
 
         }

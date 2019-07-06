@@ -56,15 +56,15 @@ class WorkoutRepository private constructor(private val exerciseService: Program
 
     }
 
-    fun getExerciseList(): MutableLiveData<List<Exercise>>{
-        val data = MutableLiveData<List<Exercise>>()
+    fun getExercise(id: Int): MutableLiveData<Exercise>{
+        val data = MutableLiveData<Exercise>()
 
-        exerciseService.getExerciseList().enqueue(object : Callback<List<Exercise>>{
-            override fun onFailure(call: Call<List<Exercise>>, t: Throwable) {
+        exerciseService.getExercise(id).enqueue(object : Callback<Exercise>{
+            override fun onFailure(call: Call<Exercise>, t: Throwable) {
 
             }
 
-            override fun onResponse(call: Call<List<Exercise>>, response: Response<List<Exercise>>) {
+            override fun onResponse(call: Call<Exercise>, response: Response<Exercise>) {
                 data.value = response.body()
             }
 

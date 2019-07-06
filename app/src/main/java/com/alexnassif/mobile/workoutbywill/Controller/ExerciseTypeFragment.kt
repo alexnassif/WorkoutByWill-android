@@ -1,22 +1,16 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import com.alexnassif.mobile.workoutbywill.Adapters.ExerciseAdapter
-import com.alexnassif.mobile.workoutbywill.Model.Exercise
-
 import com.alexnassif.mobile.workoutbywill.R
-import com.alexnassif.mobile.workoutbywill.Services.DataService
 import com.alexnassif.mobile.workoutbywill.ViewModel.ExerciseViewModel
 import kotlinx.android.synthetic.main.fragment_exercise_type.*
 
@@ -50,8 +44,8 @@ class ExerciseTypeFragment : Fragment() {
         adapter = ExerciseAdapter(context!!, mutableListOf()){exercise ->
 
             val intent = Intent(context, ExerciseDetailActivity::class.java)
-            intent.putExtra("exercise", exercise)
-            startActivity(intent)
+           // intent.putExtra("exercise", exercise)
+            //startActivity(intent)
 
         }
         exerciseRecyclerView.adapter = adapter
@@ -67,11 +61,11 @@ class ExerciseTypeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.getExercises(type!!).observe(this, Observer {
+        /*viewModel.getExercises(type!!).observe(this, Observer {
             adapter.setList(it!!)
             exTypeProgressBar.visibility = View.INVISIBLE
             exerciseRecyclerView.scheduleLayoutAnimation()
-        })
+        })*/
 
 
     }

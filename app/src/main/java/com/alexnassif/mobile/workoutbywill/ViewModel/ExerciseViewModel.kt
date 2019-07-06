@@ -5,11 +5,11 @@ import androidx.lifecycle.ViewModel
 import com.alexnassif.mobile.workoutbywill.Model.Exercise
 import com.alexnassif.mobile.workoutbywill.Repositories.WorkoutRepository
 
-class ExerciseViewModel(private val repository: WorkoutRepository): ViewModel() {
+class ExerciseViewModel(private val repository: WorkoutRepository, private val exerciseId: Int): ViewModel() {
 
-    private var exerciseList: MutableLiveData<List<Exercise>> = repository.getExerciseList()
+    private var exerciseList: MutableLiveData<Exercise> = repository.getExercise(exerciseId)
 
-    fun getExercises(type: String): MutableLiveData<List<Exercise>>{
+    fun getExercise(): MutableLiveData<Exercise>{
 
         return exerciseList
 

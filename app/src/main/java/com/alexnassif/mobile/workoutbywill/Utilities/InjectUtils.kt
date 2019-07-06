@@ -3,6 +3,7 @@ package com.alexnassif.mobile.workoutbywill.Utilities
 import com.alexnassif.mobile.workoutbywill.Repositories.WorkoutRepository
 import com.alexnassif.mobile.workoutbywill.Services.ProgramService
 import com.alexnassif.mobile.workoutbywill.ViewModel.DayVMFactory
+import com.alexnassif.mobile.workoutbywill.ViewModel.ExerciseVMFactory
 import com.alexnassif.mobile.workoutbywill.ViewModel.WorkoutViewModelFactory
 
 object InjectUtils {
@@ -19,5 +20,9 @@ object InjectUtils {
 
     fun provideDayViewModelFactory(): DayVMFactory {
         return DayVMFactory(getExerciseRepository())
+    }
+
+    fun provideExerciseViewModelFactory(exerciseId: Int): ExerciseVMFactory {
+        return ExerciseVMFactory(getExerciseRepository(), exerciseId)
     }
 }

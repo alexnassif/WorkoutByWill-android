@@ -9,12 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.alexnassif.mobile.workoutbywill.Model.ExerciseDetail
 import com.alexnassif.mobile.workoutbywill.R
-import com.bumptech.glide.Glide
 
 /**
  * Created by alexnassif on 2/1/18.
  */
-class WorkoutDetailAdapter(val context: Context, var workoutDetailList: List<ExerciseDetail>, val itemClick: (String, String) -> Unit)
+class WorkoutDetailAdapter(val context: Context, var workoutDetailList: List<ExerciseDetail>, private val itemClick: (Int) -> Unit)
     : RecyclerView.Adapter<WorkoutDetailAdapter.WorkoutDetailHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutDetailHolder {
@@ -35,7 +34,7 @@ class WorkoutDetailAdapter(val context: Context, var workoutDetailList: List<Exe
         holder.bindWorkoutDetail(context, workoutDetailList.get(position))
     }
 
-    inner class WorkoutDetailHolder(v: View, val itemClick: (String, String) -> Unit): RecyclerView.ViewHolder(v){
+    inner class WorkoutDetailHolder(v: View, val itemClick: (Int) -> Unit): RecyclerView.ViewHolder(v){
 
         val reps = v.findViewById<TextView>(R.id.repsTextView)
         val sets = v.findViewById<TextView>(R.id.setsTextView)
@@ -47,11 +46,10 @@ class WorkoutDetailAdapter(val context: Context, var workoutDetailList: List<Exe
             reps?.text = exerciseIns.reps
             sets?.text = exerciseIns.sets
             rest?.text = exerciseIns.rest
-            exName?.text = exerciseIns.exerciseName
-            Glide.with(context).load(exerciseIns.imageLocation).into(image!!)
+           // Glide.with(context).load(exerciseIns.imageLocation).into(image!!)
 
             itemView.setOnClickListener {
-                //itemClick(exerciseIns.exerciseId)
+                this.itemClick(Integer.parseInt(exerciseIns.exerciseId))
             }
         }
 

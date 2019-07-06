@@ -8,6 +8,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.QueryMap
 
 interface ProgramService {
@@ -18,8 +19,8 @@ interface ProgramService {
     @GET("workoutdetails/")
     fun getProgramDetails(@QueryMap filter: Map<String, String>): Call<List<ExerciseDetail>>
 
-    @GET("exercises")
-    fun getExerciseList(): Call<List<Exercise>>
+    @GET("exercises/{id}")
+    fun getExercise(@Path("id") id: Int): Call<Exercise>
 
     companion object Factory{
         fun create(): ProgramService {

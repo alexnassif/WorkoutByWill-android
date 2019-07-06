@@ -1,20 +1,15 @@
 package com.alexnassif.mobile.workoutbywill.Controller
 
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexnassif.mobile.workoutbywill.Adapters.WorkoutDetailAdapter
-
 import com.alexnassif.mobile.workoutbywill.R
 import com.alexnassif.mobile.workoutbywill.Services.DataService
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_day.*
 
 
@@ -50,14 +45,7 @@ class PaidDayFragment : Fragment() {
         dayRecyclerView.layoutManager = layoutManager
         DataService.getPaidWorkout(mWorkout!!, mDay!!) { dayList ->
             adapter = WorkoutDetailAdapter(context!!, dayList) {
-                keyName, category   ->
 
-                DataService.getSingleExercise(category, keyName){ exercise
-                    -> val intent = Intent(context, ExerciseDetailActivity::class.java)
-                    intent.putExtra("exercise", exercise)
-                    startActivity(intent)
-
-                }
 
 
             }
