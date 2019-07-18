@@ -15,7 +15,4 @@ class ExerciseViewModel(private val repository: WorkoutRepository, private val e
 
     }
 
-
-
-
 }

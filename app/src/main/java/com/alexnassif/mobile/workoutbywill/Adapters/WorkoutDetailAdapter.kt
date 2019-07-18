@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.alexnassif.mobile.workoutbywill.Model.ExerciseDetail
 import com.alexnassif.mobile.workoutbywill.R
+import com.bumptech.glide.Glide
 
 /**
  * Created by alexnassif on 2/1/18.
@@ -31,25 +32,26 @@ class WorkoutDetailAdapter(val context: Context, var workoutDetailList: List<Exe
     }
 
     override fun onBindViewHolder(holder: WorkoutDetailHolder, position: Int) {
-        holder.bindWorkoutDetail(context, workoutDetailList.get(position))
+        holder.bindWorkoutDetail(context, workoutDetailList[position])
     }
 
-    inner class WorkoutDetailHolder(v: View, val itemClick: (Int) -> Unit): RecyclerView.ViewHolder(v){
+    inner class WorkoutDetailHolder(v: View, private val itemClick: (Int) -> Unit): RecyclerView.ViewHolder(v){
 
-        val reps = v.findViewById<TextView>(R.id.repsTextView)
-        val sets = v.findViewById<TextView>(R.id.setsTextView)
-        val rest = v.findViewById<TextView>(R.id.restTextView)
-        val exName = v.findViewById<TextView>(R.id.exerciseWkDetailLbl)
-        val image = v.findViewById<ImageView>(R.id.workoutDetailImageView)
+        private val reps = v.findViewById<TextView>(R.id.repsTextView)
+        private val sets = v.findViewById<TextView>(R.id.setsTextView)
+        private val rest = v.findViewById<TextView>(R.id.restTextView)
+        private val exName = v.findViewById<TextView>(R.id.exerciseWkDetailLbl)
+        private val image = v.findViewById<ImageView>(R.id.workoutDetailImageView)
 
         fun bindWorkoutDetail(context: Context, exerciseIns: ExerciseDetail){
-            reps?.text = exerciseIns.reps
-            sets?.text = exerciseIns.sets
-            rest?.text = exerciseIns.rest
-           // Glide.with(context).load(exerciseIns.imageLocation).into(image!!)
+            exName.text = exerciseIns.exerciseName
+            reps.text = exerciseIns.reps
+            sets.text = exerciseIns.sets
+            rest.text = exerciseIns.rest
+            Glide.with(context).load(exerciseIns.exercisePic[0]).into(image!!)
 
             itemView.setOnClickListener {
-                this.itemClick(Integer.parseInt(exerciseIns.exerciseId))
+                itemClick(Integer.parseInt(exerciseIns.exerciseId))
             }
         }
 
