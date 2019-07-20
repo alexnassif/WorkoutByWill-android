@@ -16,5 +16,10 @@
         android:checkable="false"
         android:icon="@mipmap/ic_fitness_center_white_24dp"
         android:title="@string/title_exercises" />
+    <item
+        android:id="@+id/login"
+        android:checkable="false"
+        android:icon="@mipmap/ic_fitness_center_white_24dp"
+        android:title="@string/action_sign_in_short" />
 
 </menu>

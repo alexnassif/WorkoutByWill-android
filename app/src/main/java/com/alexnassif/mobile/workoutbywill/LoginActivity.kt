@@ -1,4 +1,4 @@
-package com.alexnassif.mobile.workoutbywill.Utilities.ui.login
+package com.alexnassif.mobile.workoutbywill
 
 import android.app.Activity
 import android.os.Bundle
@@ -14,7 +14,10 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.alexnassif.mobile.workoutbywill.R
+import com.alexnassif.mobile.workoutbywill.Utilities.ui.login.LoggedInUserView
+import com.alexnassif.mobile.workoutbywill.Utilities.ui.login.LoginViewModel
+import com.alexnassif.mobile.workoutbywill.Utilities.ui.login.LoginViewModelFactory
+
 //import com.alexnassif.mobile.workoutbywill.Utilities.R
 
 class LoginActivity : AppCompatActivity() {

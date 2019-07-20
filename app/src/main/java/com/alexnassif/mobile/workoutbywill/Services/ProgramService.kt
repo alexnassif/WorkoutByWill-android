@@ -1,15 +1,11 @@
 package com.alexnassif.mobile.workoutbywill.Services
 
-import com.alexnassif.mobile.workoutbywill.Model.Exercise
-import com.alexnassif.mobile.workoutbywill.Model.ExerciseDetail
-import com.alexnassif.mobile.workoutbywill.Model.Program
+import com.alexnassif.mobile.workoutbywill.Model.*
 import com.alexnassif.mobile.workoutbywill.Utilities.BASE_URL
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.QueryMap
+import retrofit2.http.*
 
 interface ProgramService {
 
@@ -21,6 +17,9 @@ interface ProgramService {
 
     @GET("exercises/{id}")
     fun getExercise(@Path("id") id: Int): Call<Exercise>
+
+    @POST("rest-auth/login/")
+    fun login(@Body loginUser: LoginEntity): Call<Token>
 
     companion object Factory{
         fun create(): ProgramService {

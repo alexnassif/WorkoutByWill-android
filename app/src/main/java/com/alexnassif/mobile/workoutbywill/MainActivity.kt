@@ -3,18 +3,18 @@ package com.alexnassif.mobile.workoutbywill
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.alexnassif.mobile.workoutbywill.Controller.ExerciseFragment
 import com.alexnassif.mobile.workoutbywill.Controller.PaidWorkoutFragment
 import com.alexnassif.mobile.workoutbywill.Controller.WorkoutFragment
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.BuildConfig
 import com.firebase.ui.auth.IdpResponse
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -41,6 +41,11 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_exercises -> {
                 selectedFragment = ExerciseFragment.newInstance()
                 addFragment(selectedFragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.login -> {
+                val loginIntent = Intent(this, LoginActivity::class.java)
+                startActivity(loginIntent)
                 return@OnNavigationItemSelectedListener true
             }
 
