@@ -14,9 +14,9 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.alexnassif.mobile.workoutbywill.Utilities.InjectUtils
 import com.alexnassif.mobile.workoutbywill.Utilities.ui.login.LoggedInUserView
 import com.alexnassif.mobile.workoutbywill.Utilities.ui.login.LoginViewModel
-import com.alexnassif.mobile.workoutbywill.Utilities.ui.login.LoginViewModelFactory
 
 //import com.alexnassif.mobile.workoutbywill.Utilities.R
 
@@ -33,8 +33,8 @@ class LoginActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
-
-        loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
+        val loginViewModelFactory = InjectUtils.provideLoginViewModelFactory()
+        loginViewModel = ViewModelProviders.of(this, loginViewModelFactory)
                 .get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {

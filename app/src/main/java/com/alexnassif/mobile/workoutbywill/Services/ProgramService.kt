@@ -21,6 +21,9 @@ interface ProgramService {
     @POST("rest-auth/login/")
     fun login(@Body loginUser: LoginEntity): Call<Token>
 
+    @POST("rest-auth/logout/")
+    fun logout()
+
     companion object Factory{
         fun create(): ProgramService {
 
