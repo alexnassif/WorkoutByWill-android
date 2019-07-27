@@ -1,5 +1,6 @@
 package com.alexnassif.mobile.workoutbywill
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -13,7 +14,7 @@ import com.alexnassif.mobile.workoutbywill.Utilities.InjectUtils
 import com.alexnassif.mobile.workoutbywill.Utilities.data.LoginRepository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-
+const val PICK_CONTACT_REQUEST = 1
 class MainActivity : AppCompatActivity() {
 
 
@@ -125,17 +126,29 @@ class MainActivity : AppCompatActivity() {
             }*/
 
             val loginIntent = Intent(this, LoginActivity::class.java)
-            startActivity(loginIntent)
-            invalidateOptionsMenu()
+            startActivityForResult(loginIntent, PICK_CONTACT_REQUEST)
 
 
         }else{
             repository.logout()
+            invalidateOptionsMenu()
         }
 
         return super.onOptionsItemSelected(item)
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // Check which request we're responding to
+        if (requestCode == PICK_CONTACT_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == Activity.RESULT_OK) {
+                invalidateOptionsMenu()
+                // The user picked a contact.
+                // The Intent's data Uri identifies which contact was selected.
 
+                // Do something with the contact here (bigger example below)
+            }
+        }
+    }
     /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == RC_SIGN_IN){

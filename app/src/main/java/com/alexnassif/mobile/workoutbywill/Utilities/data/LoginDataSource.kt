@@ -5,6 +5,7 @@ import com.alexnassif.mobile.workoutbywill.Model.LoginEntity
 import com.alexnassif.mobile.workoutbywill.Model.Token
 import com.alexnassif.mobile.workoutbywill.Services.ProgramService
 import com.alexnassif.mobile.workoutbywill.Utilities.data.model.LoggedInUser
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,7 +39,16 @@ class LoginDataSource{
     }
 
     fun logout() {
-        exerciseService.logout()
+        exerciseService.logout().enqueue(object : Callback<ResponseBody> {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                Log.d("responsebody", response.body()!!.string())
+            }
+
+        })
     }
 }
 

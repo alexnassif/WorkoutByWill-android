@@ -2,6 +2,7 @@ package com.alexnassif.mobile.workoutbywill.Services
 
 import com.alexnassif.mobile.workoutbywill.Model.*
 import com.alexnassif.mobile.workoutbywill.Utilities.BASE_URL
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -22,7 +23,7 @@ interface ProgramService {
     fun login(@Body loginUser: LoginEntity): Call<Token>
 
     @POST("rest-auth/logout/")
-    fun logout()
+    fun logout(): Call<ResponseBody>
 
     companion object Factory{
         fun create(): ProgramService {
